@@ -87,7 +87,8 @@ function isFree(port) {
     srv.unref();
     srv.once("error", () => resolve(false));
     srv.once("listening", () => srv.close(() => resolve(true)));
-    srv.listen(port, "0.0.0.0");
+    // Next binds to IPv6/dual-stack on Windows, so probe the same family.
+    srv.listen(port, "::");
   });
 }
 
