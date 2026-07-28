@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+/**
+ * Find the first free port in the [start, start+19] range. Used by the
+ * `dev` npm script so we never collide with a stale Next.js dev server.
+ */
+import net from "node:net";
+
+const start = Number(process.argv[2] ?? 3000);
+
+function isFree(port) {
+  return new Promise((resolve) => {
+    const srv = net.createServer();
+    srv.unref();
+    srv.once("error", () => resolve(false));
+    srv.once("listening", () => srv.close(() => resolve(true)));
+    srv.listen(port, "0.0.0.0");
+  });
+}
+
+const tried = [];
+for (let p = start; p < start + 20; p++) {
+  tried.push(p);
+  // eslint-disable-next-line no-await-in-loop
+  if (await isFree(p)) {
+    process.stdout.write(String(p));
+    process.exit(0);
+  }
+}
+process.stderr.write(`No free port in ${tried.join(", ")}\n`);
+process.exit(1);

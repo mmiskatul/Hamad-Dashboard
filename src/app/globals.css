@@ -1,0 +1,138 @@
+@import "tailwindcss" source(none);
+@import "../styles/tokens.css";
+
+@source "../app";
+@source "../components";
+@source "../features";
+@source "../shared";
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-primary);
+    background: var(--bg-canvas);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  [dir="rtl"] body {
+    font-family: var(--font-arabic);
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button {
+    font-family: inherit;
+  }
+  :focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+}
+
+@layer components {
+  ._num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+    unicode-bidi: isolate;
+    direction: ltr;
+  }
+  ._t-page {
+    font-size: 25px;
+    line-height: 30px;
+    font-weight: 500;
+    letter-spacing: -0.25px;
+  }
+  ._t-card {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+  }
+  ._t-body {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  ._t-strong {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+  }
+  ._t-caption {
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--text-secondary);
+  }
+  ._t-label {
+    font-size: 11px;
+    line-height: 15px;
+    font-weight: 500;
+    letter-spacing: 0.66px;
+    text-transform: uppercase;
+  }
+  [dir="rtl"] ._t-label {
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  ._sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Keep both directions on the same token surface. The locale itself is
+   responsible for text direction; colors and spacing remain invariant. */
+html[dir="rtl"],
+html[dir="ltr"] {
+  color-scheme: light;
+}
+
+@keyframes locale-fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+html.locale-switching main {
+  animation: locale-fade 200ms ease-out both;
+}
+
+@keyframes route-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-route-fade] {
+  animation: route-fade 180ms ease-out both;
+}

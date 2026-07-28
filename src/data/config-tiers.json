@@ -1,0 +1,41 @@
+[
+  {
+    "id": "free",
+    "name": "Free",
+    "monthlyUsd": 0,
+    "requestsLimit": 50,
+    "tokensLimit": 1000,
+    "models": ["gpt", "grok"],
+    "features": {
+      "fileUpload": false,
+      "voice": false,
+      "priority": false
+    }
+  },
+  {
+    "id": "pro",
+    "name": "Pro",
+    "monthlyUsd": 5,
+    "requestsLimit": 500,
+    "tokensLimit": 4000,
+    "models": ["gpt", "grok", "gemini", "deepseek"],
+    "features": {
+      "fileUpload": true,
+      "voice": true,
+      "priority": false
+    }
+  },
+  {
+    "id": "business",
+    "name": "Business",
+    "monthlyUsd": 24,
+    "requestsLimit": -1,
+    "tokensLimit": 8000,
+    "models": ["gpt", "grok", "gemini", "deepseek", "claude", "perplexity"],
+    "features": {
+      "fileUpload": true,
+      "voice": true,
+      "priority": true
+    }
+  }
+]

@@ -1,0 +1,664 @@
+{
+  "common": {
+    "brand": "لوحة OneAI",
+    "loading": "جارٍ التحميل…",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "apply": "تطبيق",
+    "reset": "إعادة",
+    "search": "بحث",
+    "refresh": "تحديث",
+    "filter": "تصفية",
+    "export": "تصدير",
+    "rows": "صفوف",
+    "next": "التالي",
+    "previous": "السابق",
+    "page": "صفحة",
+    "of": "من",
+    "showing": "عرض",
+    "toggleTheme": "تبديل المظهر",
+    "toggleDir": "تبديل اللغة",
+    "toggleSidebar": "تبديل الشريط الجانبي",
+    "menu": "القائمة",
+    "close": "إغلاق",
+    "open": "فتح",
+    "back": "رجوع",
+    "actions": "إجراءات",
+    "yes": "نعم",
+    "no": "لا",
+    "never": "مطلقاً",
+    "comingSoon": "قريباً",
+    "usdShort": "دولار",
+    "perMonth": "/شهر",
+    "copyId": "نسخ المعرّف",
+    "copied": "تم النسخ",
+    "expiresIn": "ينتهي خلال {days} يوم",
+    "billed": "الفوترة شهرية",
+    "renews": "يتجدد في {date}"
+  },
+  "nav": {
+    "brand": "لوحة OneAI",
+    "observe": "مراقبة",
+    "act": "إجراء",
+    "items": {
+      "overview": "نظرة عامة",
+      "users": "المستخدمون",
+      "revenue": "الإيرادات",
+      "usage": "الاستخدام والتكلفة",
+      "providers": "الموفرون",
+      "support": "الدعم",
+      "configModels": "تهيئة النماذج",
+      "configTiers": "الباقات والحصص",
+      "configPricing": "تسعير الوحدات",
+      "configUsage": "استخدام العميل",
+      "legal": "الشؤون القانونية",
+      "audit": "سجل التدقيق",
+      "account": "حساب المدير",
+      "systemStates": "حالات النظام"
+    }
+  },
+  "adminMenu": {
+    "account": "حساب المدير",
+    "systemStatus": "حالة النظام",
+    "theme": "المظهر",
+    "language": "اللغة",
+    "logout": "تسجيل الخروج",
+    "themeLight": "فاتح",
+    "themeDark": "داكن",
+    "themeSystem": "النظام",
+    "langEn": "English",
+    "langAr": "العربية"
+  },
+  "login": {
+    "title": "تسجيل الدخول",
+    "subtitle": "مدير واحد فقط. يتم تدقيق كل وصول.",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "continue": "متابعة",
+    "totpTitle": "رمز التحقق الثنائي",
+    "totpSubtitle": "أدخل الرمز المكون من 6 أرقام من تطبيق المصادقة.",
+    "verify": "تحقق وتسجيل الدخول",
+    "recovery": "استخدم رمز استرداد",
+    "lockout": "5 محاولات قبل الحظر",
+    "demoHint": "نسخة تجريبية — أي قيمة ستعمل."
+  },
+  "overview": {
+    "title": "نظرة عامة",
+    "subtitle": "صحة المنصة في لمحة — هل هي سليمة، وما تكلفتها؟",
+    "stats": {
+      "health": "صحة المنصة",
+      "mrr": "الإيرادات الشهرية المتكررة",
+      "spend": "إنفاق الرموز · 30 يوماً",
+      "activeUsers": "مستخدمون نشطون · 7 أيام"
+    },
+    "providers": "صحة الموفرين",
+    "providersManage": "إدارة",
+    "providersStatus": "الحالة",
+    "providersP95": "p95",
+    "providersErrors": "الأخطاء",
+    "providersUptime": "وقت التشغيل",
+    "costByModel": "التكلفة حسب النموذج",
+    "topModels": "النماذج الأكثر استخداماً",
+    "healthOk": "سليم",
+    "healthWarn": "متراجع",
+    "healthBad": "متوقف",
+    "range": "النطاق الزمني",
+    "range24h": "24 ساعة",
+    "range7d": "7 أيام",
+    "range30d": "30 يوماً",
+    "rangeCustom": "مخصص",
+    "rangeFrom": "تاريخ البداية",
+    "rangeTo": "تاريخ النهاية"
+  },
+  "users": {
+    "title": "المستخدمون",
+    "subtitle": "ابحث، صفِّ، وتصرف في حسابات المستخدمين.",
+    "searchPlaceholder": "ابحث بالبريد أو المعرّف",
+    "empty": "لا يوجد مستخدمون يطابقون هذه التصفية.",
+    "columns": {
+      "rowNumber": "#",
+      "user": "المستخدم",
+      "tier": "الباقة",
+      "status": "الحالة",
+      "mobile": "الجوال",
+      "requests": "الطلبات",
+      "spend": "إنفاق 30 يوماً",
+      "lastActive": "آخر نشاط",
+      "actions": "إجراءات"
+    },
+    "status": {
+      "active": "نشط",
+      "suspended": "موقوف",
+      "grace": "فترة سماح"
+    },
+    "tier": {
+      "free": "مجاني",
+      "pro": "برو",
+      "business": "أعمال"
+    },
+    "primary": "مستخدم جديد",
+    "create": {
+      "title": "إنشاء مستخدم",
+      "subtitle": "أنشئ حساب مستخدم وحدد خطته وحالته الابتدائية.",
+      "name": "الاسم",
+      "namePlaceholder": "الاسم الكامل",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "user@example.com",
+      "tier": "الباقة",
+      "tierFree": "مجاني",
+      "tierPro": "برو",
+      "tierBusiness": "أعمال",
+      "status": "الحالة",
+      "statusActive": "نشط",
+      "statusGrace": "فترة سماح",
+      "statusSuspended": "موقوف",
+      "submit": "إنشاء المستخدم",
+      "success": "تم إنشاء المستخدم بنجاح",
+      "error": "تعذّر إنشاء المستخدم"
+    },
+    "filters": {
+      "tier": "الباقة",
+      "status": "الحالة",
+      "tierAny": "كل الباقات",
+      "statusAny": "كل الحالات"
+    }
+  },
+  "userDetail": {
+    "title": "تفاصيل المستخدم",
+    "subtitle": "يمكنك التصرف في هذا الحساب. محتوى المحادثات غير متاح أبداً.",
+    "tabs": {
+      "overview": "نظرة عامة",
+      "quota": "الحصة",
+      "models": "النماذج",
+      "payments": "المدفوعات",
+      "activity": "النشاط"
+    },
+    "meta": {
+      "id": "معرّف المستخدم",
+      "email": "البريد الإلكتروني",
+      "mobile": "الجوال",
+      "signupDate": "تاريخ التسجيل",
+      "lastActive": "آخر نشاط",
+      "platform": "المنصة",
+      "requests": "الطلبات هذا الشهر",
+      "spend": "إنفاق 30 يوماً",
+      "tier": "الباقة",
+      "status": "الحالة",
+      "tokens": "الرموز المستهلكة"
+    },
+    "quota": "الحصة",
+    "suspend": "إيقاف",
+    "reactivate": "إعادة التفعيل",
+    "modelDistribution": "توزيع النموذج",
+    "ticketHistory": "سجل التذاكر",
+    "payments": "المدفوعات",
+    "paymentHistory": "سجل المدفوعات",
+    "quotaHistory": "سجل الحصص",
+    "activity": "النشاط",
+    "renewal": "التجديد القادم",
+    "nextBilling": "الفوترة القادمة",
+    "signupSource": "مصدر التسجيل",
+    "lastSeen": "آخر ظهور",
+    "memory": "الذاكرة",
+    "memoryEntries": "العناصر",
+    "memorySize": "الحجم المستخدم",
+    "memoryUpdated": "آخر تحديث",
+    "memoryCategories": "التصنيفات",
+    "memoryEmpty": "لم يتم حفظ أي ذاكرة بعد.",
+    "recentPayments": "المدفوعات الأخيرة",
+    "copyId": "نسخ المعرّف",
+    "copied": "تم النسخ",
+    "privacyNotice": "محتوى المحادثات غير متاح. اطلب من المستخدم إرفاق محادثة بتذكرة دعم.",
+    "noTickets": "لا توجد تذاكر لهذا المستخدم بعد.",
+    "noPayments": "لا توجد مدفوعات مسجلة.",
+    "noQuotaHistory": "لا توجد تمديدات حصة مسجلة.",
+    "noActivity": "لا توجد إجراءات مدير لهذا المستخدم.",
+    "suspendTitle": "إيقاف المستخدم",
+    "suspendReason": "السبب",
+    "suspendConfirm": "إيقاف",
+    "reactivateTitle": "إعادة تفعيل المستخدم",
+    "reactivateConfirm": "إعادة التفعيل",
+    "grantTokensAction": "منح رموز",
+    "grantTokensDescription": "أضف رموزاً إضافية إلى حصة هذا المستخدم. سيتم تسجيل الإجراء في سجل التدقيق.",
+    "grantTokensNotAllowed": "تمديد الحصة غير مسموح لباقة {tier} حسب إعدادات الباقات.",
+    "grantTokensTitle": "منح رموز إضافية",
+    "grantTokensSubtitle": "ستضاف الرموز إلى الحصة الشهرية للمستخدم.",
+    "grantTokensAmount": "عدد الرموز",
+    "grantTokensReason": "السبب (اختياري)",
+    "grantTokensConfirm": "منح",
+    "grantTokensSuccess": "تم منح الرموز بنجاح",
+    "grantTokensError": "فشل منح الرموز",
+    "grantTokensNoReason": "بدون سبب",
+    "override": {
+      "reasonHint": "اشرح لماذا هذا الإجراء مطلوب (مرئي للمدققين)."
+    },
+    "quotaOverride": {
+      "title": "تجاوز المدير",
+      "subtitle": "تجاوز حصة الباقة الاعتيادية. استخدم فقط عند منح حدود مخصصة لا يجب أن تكون مرتبطة بالباقة.",
+      "bypassLabel": "تجاوز نظام الحصص",
+      "bypassHelp": "إذا فُعّل، فلن يكون لهذا المستخدم حدود حصة بغض النظر عن إعدادات الباقة.",
+      "customRequestsLabel": "حد الطلبات المخصص",
+      "customRequestsPlaceholder": "اتركه فارغاً ليرث الحد الافتراضي للباقة",
+      "customTokensLabel": "حد الرموز المخصص",
+      "customTokensPlaceholder": "اتركه فارغاً ليرث الحد الافتراضي للباقة",
+      "reasonLabel": "السبب",
+      "reasonHelp": "مطلوب. مرئي للمدققين في سجل التدقيق.",
+      "saveOverride": "حفظ التجاوز",
+      "resetOverride": "إعادة إلى افتراضي الباقة",
+      "currentOverride": "تم تطبيق التجاوز حالياً",
+      "bypassOn": "التجاوز مفعّل — لا توجد حدود",
+      "bypassOff": "التجاوز معطّل — تُطبَّق الحدود المخصصة",
+      "customRequests": "الطلبات المخصصة: {value}",
+      "customTokens": "الرموز المخصصة: {value}",
+      "setBy": "حُدِّد بواسطة {actor} في {date}",
+      "successSave": "تم حفظ تجاوز الحصة",
+      "successReset": "تم مسح تجاوز الحصة",
+      "errorReasonRequired": "السبب مطلوب لحفظ التجاوز.",
+      "warning": "تحذير: يتجاوز هذا تهيئة الباقة الاعتيادية ويتم تسجيله في التدقيق."
+    }
+  },
+  "revenue": {
+    "title": "الإيرادات",
+    "subtitle": "إيرادات الاشتراكات وتوزيع الباقات والتسرب.",
+    "mrrSeries": "الإيرادات الشهرية المتكررة",
+    "tierMix": "توزيع الباقات",
+    "churn": "التسرب",
+    "stats": {
+      "mrr": "الإيراد الشهري",
+      "arr": "الإيراد السنوي",
+      "arpu": "متوسط الإيراد لكل مستخدم",
+      "churn": "التسرب"
+    },
+    "conversion": "مسار التحويل"
+  },
+  "usage": {
+    "title": "استخدام الذكاء الاصطناعي وتكلفته",
+    "subtitle": "الرموز والتكلفة عبر النماذج.",
+    "tokensByModel": "الرموز حسب النموذج",
+    "costByModel": "التكلفة حسب النموذج",
+    "topUsers": "الأكثر إنفاقاً",
+    "apply": "تطبيق",
+    "searchApplied": "تم تطبيق البحث",
+    "filters": {
+      "range": "النطاق",
+      "range7d": "7 أيام",
+      "range14d": "14 يوماً",
+      "range30d": "30 يوماً"
+    }
+  },
+  "providers": {
+    "title": "الموفرون",
+    "subtitle": "صحة الموفرين ووقت الاستجابة ومعدل الأخطاء.",
+    "columns": {
+      "provider": "الموفر",
+      "status": "الحالة",
+      "p50": "p50",
+      "p95": "p95",
+      "errorRate": "معدل الأخطاء",
+      "uptime": "الجاهزية",
+      "circuit": "قاطع الدائرة"
+    },
+    "status": {
+      "operational": "تشغيلي",
+      "degraded": "متراجع",
+      "outage": "متوقف"
+    },
+    "circuit": {
+      "closed": "مغلق",
+      "half-open": "نصف مفتوح",
+      "open": "مفتوح"
+    },
+    "disable": "تعطيل",
+    "enable": "تفعيل",
+    "disableTitle": "تعطيل الموفر",
+    "disableImpact": "سيخسر {count} مستخدم الوصول.",
+    "disableReason": "السبب",
+    "disableConfirm": "تعطيل"
+  },
+  "support": {
+    "title": "الدعم",
+    "subtitle": "تذاكر المستخدم. بيانات وصفية للقراءة فقط مع مرفقات بموافقة المستخدم.",
+    "queue": "القائمة",
+    "filters": {
+      "status": "الحالة",
+      "statusAny": "كل الحالات",
+      "priority": "الأولوية",
+      "priorityAny": "كل الأولويات"
+    },
+    "status": {
+      "open": "مفتوحة",
+      "pending": "قيد الانتظار",
+      "resolved": "محسومة"
+    },
+    "priority": {
+      "low": "منخفضة",
+      "normal": "عادية",
+      "high": "عالية"
+    },
+    "ticket": {
+      "reply": "رد",
+      "resolve": "حل",
+      "addNote": "إضافة ملاحظة",
+      "attachment": "شاركها المستخدم · تنتهي خلال {days} يوماً",
+      "noAttachment": "لا توجد مرفقات.",
+      "privacyNotice": "محتوى المحادثات غير متاح. يمكن للمستخدم إرفاق محادثة واحدة بهذه التذكرة وستنتهي صلاحيتها تلقائياً."
+    },
+    "reply": "الرد",
+    "send": "إرسال الرد",
+    "saveDraft": "حفظ المسودة",
+    "sendAndClose": "إرسال وإغلاق التذكرة",
+    "confirmSend": "إرسال الرد",
+    "confirmClose": "إغلاق التذكرة",
+    "replyPlaceholder": "اكتب رداً إلى {email}…",
+    "sentToast": "تم إرسال الرد إلى {email}",
+    "closedToast": "تم إغلاق التذكرة",
+    "draftSavedToast": "تم حفظ المسودة (تجريبي)",
+    "attachments": {
+      "title": "مرفق",
+      "expires": "ينتهي خلال {days} يوماً"
+    }
+  },
+  "configModels": {
+    "title": "تهيئة النماذج",
+    "subtitle": "بدّل النماذج المتاحة للعملاء. تُسجَّل التغييرات.",
+    "columns": {
+      "model": "النموذج",
+      "enabled": "مفعّل",
+      "affected": "المتأثرون",
+      "actions": "إجراءات"
+    },
+    "impact": {
+      "title": "تعطيل هذا النموذج يؤثر على {count} مستخدم.",
+      "hint": "سيخسر المستخدمون الوصول عند طلب /models التالي."
+    },
+    "save": "حفظ التهيئة"
+  },
+  "configTiers": {
+    "title": "الباقات والحصص",
+    "subtitle": "الحدود والميزات لكل باقة. تُسجَّل التغييرات.",
+    "comparison": "المقارنة",
+    "columns": {
+      "feature": "الميزة",
+      "free": "مجاني",
+      "pro": "برو",
+      "business": "أعمال"
+    },
+    "save": "نشر تغييرات الباقات",
+    "priceUsd": "السعر (دولار/شهر)",
+    "requestsLimit": "الطلبات / شهر",
+    "tokensLimit": "الرموز / شهر",
+    "models": "النماذج المضمنة",
+    "features": "الميزات",
+    "fileUpload": "رفع الملفات",
+    "voice": "الإدخال الصوتي",
+    "priority": "التوجيه بالأولوية",
+    "saveReason": "سبب التغيير (10 أحرف على الأقل)",
+    "reset": "إعادة إلى الافتراضي",
+    "defaultReasons": {
+      "annualReview": "مراجعة الأسعار السنوية",
+      "seasonal": "حملة موسمية"
+    }
+  },
+  "pricing": {
+    "title": "تسعير الوحدات",
+    "subtitle": "تحكم في حجم وسعر كل وحدة قابلة للفوترة. تُسجَّل التغييرات.",
+    "requestUnit": "وحدة الطلبات",
+    "tokenUnit": "وحدة الرموز",
+    "unitSize": "حجم الوحدة",
+    "unitPrice": "السعر (دولار)",
+    "unitEnabled": "مفعّلة",
+    "lastUpdated": "آخر تحديث {ago} بواسطة {by}",
+    "save": "حفظ التغييرات",
+    "reasonHint": "سبب التغيير (10 أحرف على الأقل)",
+    "preview": "معاينة",
+    "history": "سجل التغييرات",
+    "historyEmpty": "لا توجد تغييرات تسعير بعد."
+  },
+  "usageToggle": {
+    "title": "لوحة استخدام العميل",
+    "subtitle": "اعرض استخدام الرموز والتكلفة لكل نموذج للمشتركين في تطبيق الجوال.",
+    "enabled": "مرئية للمشتركين",
+    "disabled": "مخفية عن المشتركين",
+    "lastUpdated": "آخر تحديث {ago} بواسطة {by}",
+    "toggleOn": "تم تفعيل لوحة استخدام العميل",
+    "toggleOff": "تم تعطيل لوحة استخدام العميل"
+  },
+  "audit": {
+    "title": "سجل التدقيق",
+    "subtitle": "غير قابل للتغيير، يُلحق فقط. كل كتابة تُسجَّل قبل إرسال الرد.",
+    "filters": {
+      "action": "الإجراء",
+      "actor": "المنفّذ",
+      "range": "النطاق"
+    },
+    "columns": {
+      "time": "الوقت",
+      "actor": "المنفّذ",
+      "action": "الإجراء",
+      "target": "الهدف",
+      "reason": "السبب"
+    },
+    "actions": {
+      "login": "تسجيل دخول",
+      "quotaOverride": "تمديد حصة",
+      "userStatus": "تغيير حالة المستخدم",
+      "providerToggle": "تبديل الموفر",
+      "tierChange": "تغيير الباقة",
+      "modelToggle": "تبديل النموذج",
+      "sessionRevoked": "إلغاء جلسة",
+      "tier": { "update": "تحديث الباقة" },
+      "model": { "toggle": "تبديل النموذج" },
+      "usage": { "toggle": "تبديل لوحة الاستخدام" },
+      "legal": {
+        "publish": "نشر نسخة قانونية",
+        "restore": "استعادة نسخة قانونية",
+        "delete": "حذف نسخة قانونية"
+      },
+      "support": {
+        "reply": "إرسال رد دعم",
+        "close": "إغلاق تذكرة"
+      }
+    }
+  },
+  "account": {
+    "title": "حساب المدير",
+    "subtitle": "الملف والمصادقة الثنائية والجلسات النشطة.",
+    "profile": "الملف الشخصي",
+    "totp": "المصادقة الثنائية",
+    "totpEnabled": "مفعّلة",
+    "totpDisabled": "معطّلة",
+    "enableTotp": "تفعيل المصادقة الثنائية",
+    "sessions": "الجلسات النشطة",
+    "current": "الجلسة الحالية",
+    "revoke": "إلغاء",
+    "revokeAllOthers": "إلغاء جميع الجلسات الأخرى",
+    "form": {
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "language": "اللغة",
+      "theme": "المظهر"
+    },
+    "save": "حفظ الملف"
+  },
+  "systemStates": {
+    "title": "حالات النظام",
+    "subtitle": "صفحات مرجعية لحالات فارغة والخطأ وعدم الاتصال والصيانة.",
+    "tabs": {
+      "forbidden": "ممنوع",
+      "error": "خطأ في الخادم",
+      "maintenance": "صيانة",
+      "empty": "فارغ",
+      "offline": "غير متصل"
+    },
+    "forbidden": {
+      "title": "الوصول مرفوض",
+      "body": "ليس لديك إذن لعرض هذه الصفحة.",
+      "cta": "العودة للنظرة العامة"
+    },
+    "error": {
+      "title": "حدث خطأ ما",
+      "body": "حدث خطأ غير متوقع. تم تسجيل الحادثة.",
+      "cta": "حاول مجدداً"
+    },
+    "maintenance": {
+      "title": "صيانة مجدولة",
+      "body": "الصيانة قيد التنفيذ. ستعود اللوحة قريباً.",
+      "cta": "تحديث"
+    },
+    "empty": {
+      "title": "لا شيء بعد",
+      "body": "عند ورود الأحداث ستظهر هنا.",
+      "cta": "تحديث"
+    },
+    "offline": {
+      "title": "أنت غير متصل",
+      "body": "تعذر الوصول إلى الخادم. تحقق من الاتصال.",
+      "cta": "إعادة المحاولة"
+    }
+  },
+  "confirm": {
+    "generic": {
+      "title": "تأكيد",
+      "body": "هل أنت متأكد من المتابعة؟",
+      "confirm": "تأكيد",
+      "cancel": "إلغاء"
+    }
+  },
+  "toast": {
+    "saved": "تم الحفظ",
+    "savedDetail": "تم تطبيق تغييراتك.",
+    "overrideApplied": "تم تطبيق تمديد الحصة",
+    "userSuspended": "تم إيقاف المستخدم",
+    "userReactivated": "تمت إعادة التفعيل",
+    "providerDisabled": "تم تعطيل الموفر",
+    "providerEnabled": "تم تفعيل الموفر",
+    "tiersPublished": "تم نشر تهيئة الباقات",
+    "tiersReset": "تمت إعادة الباقات إلى الافتراضي",
+    "legalPublished": "تم نشر النسخة الجديدة",
+    "legalRestored": "تمت استعادة النسخة",
+    "legalDeleted": "تم حذف النسخة"
+  },
+  "table": {
+    "sortAsc": "ترتيب تصاعدي",
+    "sortDesc": "ترتيب تنازلي",
+    "empty": "لا توجد نتائج."
+  },
+  "legal": {
+    "title": {
+      "heading": "الشؤون القانونية",
+      "terms": "الشروط والأحكام",
+      "privacy": "سياسة الخصوصية"
+    },
+    "subtitle": "إدارة نسخ وثيقتي الشروط والأحكام وسياسة الخصوصية.",
+    "tabs": {
+      "terms": "الشروط والأحكام",
+      "privacy": "سياسة الخصوصية"
+    },
+    "currentVersion": "النسخة الحالية",
+    "editor": "المحرر",
+    "preview": "المعاينة",
+    "view": "عرض المستند",
+    "edit": "تعديل",
+    "cancel": "إلغاء",
+    "saveNewVersion": "حفظ نسخة جديدة",
+    "restore": "استعادة",
+    "delete": "حذف",
+    "reasonRequired": "السبب مطلوب (10 أحرف على الأقل)",
+    "versionHistory": "سجل النسخ",
+    "deleteConfirm": "حذف هذه النسخة؟",
+    "restoreConfirm": "استعادة هذه النسخة كنسخة حالية؟",
+    "summaryPlaceholder": "ملخص مختصر لهذه النسخة",
+    "versionLabel": "النسخة",
+    "isCurrent": "الحالية",
+    "emptyBody": "اكتب المستند في المحرر. يدعم Markdown."
+  },
+  "errors": {
+    "reasonRequired": "السبب مطلوب (10 أحرف على الأقل)",
+    "versionNotFound": "النسخة غير موجودة",
+    "cannotDeleteOnly": "لا يمكن حذف النسخة الوحيدة",
+    "cannotDeleteCurrent": "لا يمكن حذف النسخة الحالية"
+  },
+  "notFound": {
+    "title": "غير موجود",
+    "body": "الصفحة غير موجودة.",
+    "cta": "العودة للنظرة العامة"
+  },
+  "globalError": {
+    "title": "حدث خطأ ما",
+    "body": "حدث خطأ غير متوقع.",
+    "cta": "حاول مجدداً"
+  },
+  "legalPages": {
+    "termsSubtitle": "إدارة نسخ وثيقة الشروط والأحكام.",
+    "privacySubtitle": "إدارة نسخ وثيقة سياسة الخصوصية."
+  },
+  "supportTicket": {
+    "metadataOnly": "بيانات وصفية فقط — راجع سجل التدقيق لكل إجراءات المدير.",
+    "opened": "مفتوحة منذ",
+    "updated": "محدّثة منذ"
+  },
+  "quotaCard": {
+    "requestsThisMonth": "الطلبات هذا الشهر",
+    "spend30d": "إنفاق 30 يوماً"
+  },
+  "dataTable": {
+    "empty": "لا توجد نتائج.",
+    "searchPlaceholder": "بحث"
+  },
+  "actions": {
+    "view": "عرض",
+    "edit": "تعديل",
+    "suspend": "إيقاف",
+    "reactivate": "إعادة التفعيل",
+    "reply": "رد",
+    "resolve": "حل",
+    "enable": "تفعيل",
+    "disable": "تعطيل",
+    "revoke": "إلغاء"
+  },
+  "totp": {
+    "qrHint": "امسح رمز الـQR التجريبي باستخدام تطبيق المصادقة.",
+    "secretLabel": "السر",
+    "code": "الرمز",
+    "remaining": "{seconds} ثانية متبقية",
+    "scanInstructions": "امسح باستخدام Google Authenticator أو 1Password أو Authy.",
+    "verify": "تحقق من الرمز",
+    "regenerateConfirmTitle": "تجديد رموز الاسترداد",
+    "regenerateConfirmBody": "ستتوقف رموز الاسترداد الحالية عن العمل. هل تريد المتابعة؟",
+    "regenerateConfirmAction": "تجديد"
+  },
+  "recovery": {
+    "reveal": "إظهار",
+    "hide": "إخفاء",
+    "regenerate": "تجديد",
+    "shown": "مرئية",
+    "hidden": "مخفية",
+    "copyAll": "نسخ الكل"
+  },
+  "twoFactor": {
+    "enabled": "المصادقة الثنائية",
+    "disabled": "المصادقة الثنائية معطّلة",
+    "enable": "تفعيل المصادقة الثنائية",
+    "disable": "تعطيل المصادقة الثنائية",
+    "email": "بريد المصادقة الثنائية",
+    "emailHint": "بريد منفصل يُستخدم لإرسال رموز التحقق المكونة من 6 أرقام. لن نرسل الرموز إلا إلى هذا العنوان.",
+    "sendCode": "إرسال رمز التحقق",
+    "code": "رمز التحقق",
+    "codeHint": "أدخل الرمز المكون من 6 أرقام المرسل إلى بريد المصادقة الثنائية.",
+    "verify": "تحقق",
+    "resend": "إعادة إرسال الرمز",
+    "verified": "محقّقة",
+    "notVerified": "غير محقّقة",
+    "updateEmail": "تحديث بريد المصادقة الثنائية",
+    "invalidEmail": "أدخل عنوان بريد صالح.",
+    "codeMismatch": "الرمز غير صحيح. حاول مجدداً.",
+    "codeExpired": "انتهت صلاحية الرمز. اطلب رمزاً جديداً.",
+    "tooManyAttempts": "محاولات كثيرة جداً. اطلب رمزاً جديداً.",
+    "loginVerifyTitle": "تحقق من تسجيل الدخول",
+    "loginVerifyBody": "أرسلنا رمزاً مكوناً من 6 أرقام إلى بريد المصادقة الثنائية. في هذه النسخة التجريبية، رمزك هو: {code}",
+    "codeLabel": "الرمز المكون من 6 أرقام",
+    "submit": "متابعة",
+    "back": "رجوع"
+  }
+}

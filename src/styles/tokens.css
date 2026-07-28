@@ -1,0 +1,130 @@
+/* Generated from design/admin-ui.md §2 (as-corrected). Do not hand edit. */
+:root {
+  --slate-50: #f7f7f7;
+  --slate-100: #eeeeef;
+  --slate-200: #dededf;
+  --slate-300: #c7c7c9;
+  --slate-400: #aaaaac;
+  --slate-500: #8c8c8e;
+  --slate-600: #717173;
+  --slate-700: #585859;
+  --slate-800: #424243;
+  --slate-900: #2e2e2f;
+  --slate-950: #141415;
+  --gold-50: #fff0da;
+  --gold-100: #ffe5c7;
+  --gold-200: #ffd1aa;
+  --gold-300: #f7b889;
+  --gold-400: #de9965;
+  --gold-500: #be7a43;
+  --gold-600: #a05f28;
+  --gold-700: #824710;
+  --gold-800: #653300;
+  --gold-900: #4a2100;
+  --gold-950: #361500;
+  --green-50: #d8ffde;
+  --green-100: #c3ffcd;
+  --green-200: #a3f5b2;
+  --green-300: #7de292;
+  --green-400: #51c66f;
+  --green-500: #1fa74e;
+  --green-600: #008a34;
+  --green-700: #006e1e;
+  --green-800: #00550d;
+  --green-900: #003c02;
+  --green-950: #002b00;
+  --amber-50: #fff0c7;
+  --amber-100: #ffe5ac;
+  --amber-200: #ffd084;
+  --amber-300: #ffb655;
+  --amber-400: #e9960c;
+  --amber-500: #c97600;
+  --amber-600: #ab5b00;
+  --amber-700: #8b4200;
+  --amber-800: #6d2f00;
+  --amber-900: #501d00;
+  --amber-950: #3b1100;
+  --red-50: #ffe1d7;
+  --red-100: #ffd0c3;
+  --red-200: #ffb4a5;
+  --red-300: #ff9283;
+  --red-400: #ff6a5e;
+  --red-500: #f3413b;
+  --red-600: #d11c1f;
+  --red-700: #ac0003;
+  --red-800: #880000;
+  --red-900: #650000;
+  --red-950: #4c0000;
+  --violet-50: #f8edff;
+  --violet-100: #f1e0ff;
+  --violet-200: #e2c9ff;
+  --violet-300: #cdadff;
+  --violet-400: #b28aff;
+  --violet-500: #9567ff;
+  --violet-600: #7b4be0;
+  --violet-700: #6131bb;
+  --violet-800: #4b1d96;
+  --violet-900: #350b71;
+  --violet-950: #260156;
+  --bg-canvas: var(--slate-100);
+  --bg-surface: var(--slate-50);
+  --bg-subtle: var(--slate-50);
+  --bg-muted: var(--slate-200);
+  /* Distinct, accessible hover color for interactive table rows.
+     Sits clearly above --bg-subtle (slate-50) so users perceive the
+     row changing under the cursor. Also visually separated from
+     --bg-muted to avoid colliding with secondary chrome surfaces. */
+  --bg-row-hover: var(--slate-200);
+  --bg-surface-inverse: var(--slate-900);
+  --surface-glass: rgba(255,255,255,0.72);
+  --surface-glass-highlight: rgba(255,255,255,0.6);
+  --text-primary: var(--slate-900);
+  --text-secondary: var(--slate-700);
+  --text-disabled: var(--slate-400);
+  --text-on-accent: var(--slate-50);
+  --text-on-neutral: var(--slate-100);
+  --text-inverse: var(--slate-100);
+  --border-default: var(--slate-300);
+  --border-strong: var(--slate-500);
+  --border-focus: var(--gold-600);
+  --action-primary: var(--gold-600);
+  --action-primary-hover: var(--gold-700);
+  --action-primary-transparent: rgba(222, 153, 101, .2);
+  --action-neutral: var(--slate-900);
+  --action-neutral-hover: var(--slate-800);
+  --action-secondary: var(--violet-200);
+  --success: var(--green-600);
+  --warning: var(--amber-500);
+  --danger: var(--red-600);
+  --success-text: var(--green-700);
+  --warning-text: var(--amber-700);
+  --danger-text: var(--red-700);
+  --success-wash: rgba(0,138,52,.12);
+  --warning-wash: rgba(201,118,0,.14);
+  --danger-wash: rgba(209,28,31,.10);
+  --model-gpt: #10a37f; --model-gemini: #4285f4; --model-claude: #d97757;
+  --model-deepseek: #4d6bfe; --model-perplexity: #20808d; --model-grok: var(--slate-900);
+  --funnel-tier-0: var(--gold-500); --funnel-tier-1: var(--gold-400); --funnel-tier-2: var(--amber-400); --funnel-tier-3: var(--green-500); --funnel-tier-4: var(--violet-500);
+  /* Funnel chart shading — top of funnel is the brand gold; subsequent
+     tiers cool down through amber, success, and a muted secondary so the
+     conversion drop is read at a glance. */
+  --funnel-tier-0: var(--gold-600);
+  --funnel-tier-1: var(--gold-400);
+  --funnel-tier-2: var(--amber-500);
+  --funnel-tier-3: var(--green-600);
+  --funnel-tier-4: var(--violet-600);
+  --space-0: 0; --space-1: 2px; --space-2: 4px; --space-3: 8px; --space-4: 12px; --space-5: 16px; --space-6: 20px; --space-7: 24px; --space-8: 32px; --space-9: 40px; --space-10: 48px; --space-11: 64px; --space-12: 96px;
+  --radius-none: 0; --radius-xs: 4px; --radius-sm: 6px; --radius-md: 8px; --radius-lg: 12px; --radius-xl: 16px; --radius-2xl: 24px; --radius-full: 9999px;
+  --e1: 0 1px 2px 0 rgba(76,83,97,.05); --e2: 0 2px 4px -1px rgba(76,83,97,.08); --e3: 0 4px 8px -2px rgba(76,83,97,.10); --e4: 0 8px 16px -4px rgba(76,83,97,.12); --e5: 0 16px 24px -6px rgba(76,83,97,.14);
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  --bg-canvas: var(--slate-950); --bg-surface: var(--slate-900); --bg-subtle: var(--slate-800); --bg-muted: rgba(101,101,103,.4); --bg-row-hover: var(--slate-700); --bg-surface-inverse: var(--slate-100); --surface-glass: rgba(40,40,42,0.62); --surface-glass-highlight: rgba(255,255,255,0.06);
+  --text-primary: var(--slate-50); --text-secondary: var(--slate-400); --text-disabled: var(--slate-600); --text-on-accent: var(--slate-950); --text-on-neutral: var(--slate-900); --text-inverse: var(--slate-900);
+  --border-default: var(--slate-800); --border-strong: var(--slate-500); --border-focus: var(--gold-400);
+  --action-primary: var(--gold-500); --action-primary-hover: var(--gold-400); --action-primary-transparent: rgba(130,71,16,.6); --action-neutral: var(--slate-100); --action-neutral-hover: var(--slate-200); --action-secondary: var(--violet-800);
+  --success: var(--green-500); --warning: var(--amber-400); --danger: var(--red-500); --success-text: var(--green-400); --warning-text: var(--amber-300); --danger-text: var(--red-400);
+  --success-wash: rgba(31,167,78,.16); --warning-wash: rgba(233,150,12,.16); --danger-wash: rgba(243,65,59,.14); --model-grok: var(--slate-100);
+  --e1: none; --e2: none; --e3: 0 0 0 1px var(--slate-800); --e4: 0 0 0 1px var(--slate-800); --e5: 0 0 0 1px var(--slate-800);
+  color-scheme: dark;
+}

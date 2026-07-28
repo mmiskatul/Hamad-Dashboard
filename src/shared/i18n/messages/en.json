@@ -1,0 +1,664 @@
+{
+  "common": {
+    "brand": "OneAI Admin",
+    "loading": "Loading…",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "apply": "Apply",
+    "reset": "Reset",
+    "search": "Search",
+    "refresh": "Refresh",
+    "filter": "Filter",
+    "export": "Export",
+    "rows": "Rows",
+    "next": "Next",
+    "previous": "Previous",
+    "page": "Page",
+    "of": "of",
+    "showing": "Showing",
+    "toggleTheme": "Toggle theme",
+    "toggleDir": "Toggle language",
+    "toggleSidebar": "Toggle sidebar",
+    "menu": "Menu",
+    "close": "Close",
+    "open": "Open",
+    "back": "Back",
+    "actions": "Actions",
+    "yes": "Yes",
+    "no": "No",
+    "never": "Never",
+    "comingSoon": "Coming soon",
+    "usdShort": "USD",
+    "perMonth": "/mo",
+    "copyId": "Copy ID",
+    "copied": "Copied",
+    "expiresIn": "expires in {days} days",
+    "billed": "Billed monthly",
+    "renews": "Renews on {date}"
+  },
+  "nav": {
+    "brand": "OneAI Admin",
+    "observe": "Observe",
+    "act": "Act",
+    "items": {
+      "overview": "Overview",
+      "users": "Users",
+      "revenue": "Revenue",
+      "usage": "AI Usage & Cost",
+      "providers": "Providers",
+      "support": "Support",
+      "configModels": "Model Configuration",
+      "configTiers": "Tiers & Quotas",
+      "configPricing": "Unit Pricing",
+      "configUsage": "Customer Usage",
+      "legal": "Legal",
+      "audit": "Audit Log",
+      "account": "Admin Account",
+      "systemStates": "System States"
+    }
+  },
+  "adminMenu": {
+    "account": "Admin Account",
+    "systemStatus": "System Status",
+    "theme": "Theme",
+    "language": "Language",
+    "logout": "Logout",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeSystem": "System",
+    "langEn": "English",
+    "langAr": "العربية"
+  },
+  "login": {
+    "title": "Sign in",
+    "subtitle": "Single super-admin. Access is audited.",
+    "email": "Email",
+    "password": "Password",
+    "continue": "Continue",
+    "totpTitle": "Two-factor code",
+    "totpSubtitle": "Enter the 6-digit code from your authenticator app.",
+    "verify": "Verify & sign in",
+    "recovery": "Use a recovery code",
+    "lockout": "5 attempts before lockout",
+    "demoHint": "Demo build — any value will sign you in."
+  },
+  "overview": {
+    "title": "Overview",
+    "subtitle": "Platform health at a glance — is it healthy, and what is it costing?",
+    "stats": {
+      "health": "Platform health",
+      "mrr": "MRR",
+      "spend": "Token spend · 30d",
+      "activeUsers": "Active users · 7d"
+    },
+    "providers": "Provider health",
+    "providersManage": "Manage",
+    "providersStatus": "Status",
+    "providersP95": "p95",
+    "providersErrors": "Errors",
+    "providersUptime": "Uptime",
+    "costByModel": "Cost by model",
+    "topModels": "Top models",
+    "healthOk": "Healthy",
+    "healthWarn": "Degraded",
+    "healthBad": "Outage",
+    "range": "Time range",
+    "range24h": "24h",
+    "range7d": "7d",
+    "range30d": "30d",
+    "rangeCustom": "Custom",
+    "rangeFrom": "Start date",
+    "rangeTo": "End date"
+  },
+  "users": {
+    "title": "Users",
+    "subtitle": "Search, filter, and operate on user accounts.",
+    "searchPlaceholder": "Search by email or ID",
+    "empty": "No users match these filters.",
+    "columns": {
+      "rowNumber": "#",
+      "user": "User",
+      "tier": "Tier",
+      "status": "Status",
+      "mobile": "Mobile",
+      "requests": "Requests",
+      "spend": "30d spend",
+      "lastActive": "Last active",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Active",
+      "suspended": "Suspended",
+      "grace": "Grace"
+    },
+    "tier": {
+      "free": "Free",
+      "pro": "Pro",
+      "business": "Business"
+    },
+    "primary": "New user",
+    "create": {
+      "title": "Create user",
+      "subtitle": "Create a user account and set its initial plan and status.",
+      "name": "Name",
+      "namePlaceholder": "Full name",
+      "email": "Email",
+      "emailPlaceholder": "user@example.com",
+      "tier": "Tier",
+      "tierFree": "Free",
+      "tierPro": "Pro",
+      "tierBusiness": "Business",
+      "status": "Status",
+      "statusActive": "Active",
+      "statusGrace": "Grace",
+      "statusSuspended": "Suspended",
+      "submit": "Create user",
+      "success": "User created successfully",
+      "error": "Could not create user"
+    },
+    "filters": {
+      "tier": "Tier",
+      "status": "Status",
+      "tierAny": "All tiers",
+      "statusAny": "All statuses"
+    }
+  },
+  "userDetail": {
+    "title": "User detail",
+    "subtitle": "Operate on this account. Conversation content is never accessible.",
+    "tabs": {
+      "overview": "Overview",
+      "quota": "Quota",
+      "models": "Models",
+      "payments": "Payments",
+      "activity": "Activity"
+    },
+    "meta": {
+      "id": "User ID",
+      "email": "Email",
+      "mobile": "Mobile",
+      "signupDate": "Signup date",
+      "lastActive": "Last active",
+      "platform": "Platform",
+      "requests": "Requests this month",
+      "spend": "30d spend",
+      "tier": "Tier",
+      "status": "Status",
+      "tokens": "Tokens spent"
+    },
+    "quota": "Quota",
+    "suspend": "Suspend",
+    "reactivate": "Reactivate",
+    "modelDistribution": "Model distribution",
+    "ticketHistory": "Ticket history",
+    "payments": "Payments",
+    "paymentHistory": "Payment history",
+    "quotaHistory": "Quota history",
+    "activity": "Activity",
+    "renewal": "Next renewal",
+    "nextBilling": "Next billing",
+    "signupSource": "Signup source",
+    "lastSeen": "Last seen",
+    "memory": "Memory",
+    "memoryEntries": "Entries",
+    "memorySize": "Size used",
+    "memoryUpdated": "Last updated",
+    "memoryCategories": "Categories",
+    "memoryEmpty": "No memory saved yet.",
+    "recentPayments": "Recent payments",
+    "copyId": "Copy ID",
+    "copied": "Copied",
+    "privacyNotice": "Conversation content is never accessible. Ask the user to attach a conversation to a support ticket.",
+    "noTickets": "No tickets yet for this user.",
+    "noPayments": "No payments recorded.",
+    "noQuotaHistory": "No quota extensions recorded.",
+    "noActivity": "No admin actions recorded for this user.",
+    "suspendTitle": "Suspend user",
+    "suspendReason": "Reason",
+    "suspendConfirm": "Suspend",
+    "reactivateTitle": "Reactivate user",
+    "reactivateConfirm": "Reactivate",
+    "grantTokensAction": "Grant tokens",
+    "grantTokensDescription": "Add extra tokens to this user's quota. The action is recorded in the audit log.",
+    "grantTokensNotAllowed": "Quota extensions are not allowed for the {tier} tier per tier configuration.",
+    "grantTokensTitle": "Grant extra tokens",
+    "grantTokensSubtitle": "Tokens will be added to the user's monthly quota.",
+    "grantTokensAmount": "Number of tokens",
+    "grantTokensReason": "Reason (optional)",
+    "grantTokensConfirm": "Grant",
+    "grantTokensSuccess": "Tokens granted successfully",
+    "grantTokensError": "Failed to grant tokens",
+    "grantTokensNoReason": "No reason provided",
+    "override": {
+      "reasonHint": "Explain why this action is needed (visible to auditors)."
+    },
+    "quotaOverride": {
+      "title": "Admin override",
+      "subtitle": "Bypass the normal tier quota. Use only when granting custom limits that should not be tier-bound.",
+      "bypassLabel": "Bypass quota system",
+      "bypassHelp": "If enabled, this user has no quota limits regardless of tier configuration.",
+      "customRequestsLabel": "Custom request limit",
+      "customRequestsPlaceholder": "Leave blank to inherit tier default",
+      "customTokensLabel": "Custom token limit",
+      "customTokensPlaceholder": "Leave blank to inherit tier default",
+      "reasonLabel": "Reason",
+      "reasonHelp": "Required. Visible to auditors in the audit log.",
+      "saveOverride": "Save override",
+      "resetOverride": "Reset to tier default",
+      "currentOverride": "Currently overridden",
+      "bypassOn": "Bypass ON — no limits applied",
+      "bypassOff": "Bypass OFF — custom limits applied",
+      "customRequests": "Custom requests: {value}",
+      "customTokens": "Custom tokens: {value}",
+      "setBy": "Set by {actor} on {date}",
+      "successSave": "Quota override saved",
+      "successReset": "Quota override cleared",
+      "errorReasonRequired": "A reason is required to save an override.",
+      "warning": "Warning: this bypasses the normal tier configuration and is audited."
+    }
+  },
+  "revenue": {
+    "title": "Revenue",
+    "subtitle": "Subscription revenue, tier mix, and churn.",
+    "mrrSeries": "Monthly recurring revenue",
+    "tierMix": "Tier mix",
+    "churn": "Churn",
+    "stats": {
+      "mrr": "MRR",
+      "arr": "ARR",
+      "arpu": "ARPU",
+      "churn": "Churn"
+    },
+    "conversion": "Conversion funnel"
+  },
+  "usage": {
+    "title": "AI Usage & Cost",
+    "subtitle": "Tokens and cost across models.",
+    "tokensByModel": "Tokens by model",
+    "costByModel": "Cost by model",
+    "topUsers": "Top users by spend",
+    "apply": "Apply",
+    "searchApplied": "Search applied",
+    "filters": {
+      "range": "Range",
+      "range7d": "7 days",
+      "range14d": "14 days",
+      "range30d": "30 days"
+    }
+  },
+  "providers": {
+    "title": "Providers",
+    "subtitle": "Provider health, latency, and error rates.",
+    "columns": {
+      "provider": "Provider",
+      "status": "Status",
+      "p50": "p50",
+      "p95": "p95",
+      "errorRate": "Error rate",
+      "uptime": "Uptime",
+      "circuit": "Circuit"
+    },
+    "status": {
+      "operational": "Operational",
+      "degraded": "Degraded",
+      "outage": "Outage"
+    },
+    "circuit": {
+      "closed": "Closed",
+      "half-open": "Half-open",
+      "open": "Open"
+    },
+    "disable": "Disable",
+    "enable": "Enable",
+    "disableTitle": "Disable provider",
+    "disableImpact": "{count} users will lose access.",
+    "disableReason": "Reason",
+    "disableConfirm": "Disable"
+  },
+  "support": {
+    "title": "Support",
+    "subtitle": "User-submitted tickets. Read-only metadata plus user-consented attachments.",
+    "queue": "Queue",
+    "filters": {
+      "status": "Status",
+      "statusAny": "All statuses",
+      "priority": "Priority",
+      "priorityAny": "All priorities"
+    },
+    "status": {
+      "open": "Open",
+      "pending": "Pending",
+      "resolved": "Resolved"
+    },
+    "priority": {
+      "low": "Low",
+      "normal": "Normal",
+      "high": "High"
+    },
+    "ticket": {
+      "reply": "Reply",
+      "resolve": "Resolve",
+      "addNote": "Add note",
+      "attachment": "Shared by user · expires in {days} days",
+      "noAttachment": "No attachment shared.",
+      "privacyNotice": "Conversation content is never accessible. The user can attach a single conversation to this ticket; it expires automatically."
+    },
+    "reply": "Reply",
+    "send": "Send reply",
+    "saveDraft": "Save draft",
+    "sendAndClose": "Send & close ticket",
+    "confirmSend": "Send reply",
+    "confirmClose": "Close ticket",
+    "replyPlaceholder": "Write a reply to {email}…",
+    "sentToast": "Reply sent to {email}",
+    "closedToast": "Ticket closed",
+    "draftSavedToast": "Draft saved (mocked)",
+    "attachments": {
+      "title": "Attachment",
+      "expires": "Expires in {days} days"
+    }
+  },
+  "configModels": {
+    "title": "Model Configuration",
+    "subtitle": "Toggle models available to clients. Writes are audited.",
+    "columns": {
+      "model": "Model",
+      "enabled": "Enabled",
+      "affected": "Affected users",
+      "actions": "Actions"
+    },
+    "impact": {
+      "title": "Disabling this model affects {count} users.",
+      "hint": "Affected users will lose access on the next /models fetch."
+    },
+    "save": "Save configuration"
+  },
+  "configTiers": {
+    "title": "Tiers & Quotas",
+    "subtitle": "Limits and features per tier. Writes are audited.",
+    "comparison": "Comparison",
+    "columns": {
+      "feature": "Feature",
+      "free": "Free",
+      "pro": "Pro",
+      "business": "Business"
+    },
+    "save": "Publish tier changes",
+    "priceUsd": "Price (USD/mo)",
+    "requestsLimit": "Requests / month",
+    "tokensLimit": "Tokens / month",
+    "models": "Models included",
+    "features": "Features",
+    "fileUpload": "File upload",
+    "voice": "Voice input",
+    "priority": "Priority routing",
+    "saveReason": "Reason for change (≥ 10 characters)",
+    "reset": "Reset to defaults",
+    "defaultReasons": {
+      "annualReview": "Annual pricing review",
+      "seasonal": "Seasonal campaign"
+    }
+  },
+  "pricing": {
+    "title": "Unit Pricing",
+    "subtitle": "Control the size and price of each billable unit. Writes are audited.",
+    "requestUnit": "Request Unit",
+    "tokenUnit": "Token Unit",
+    "unitSize": "Unit size",
+    "unitPrice": "Price (USD)",
+    "unitEnabled": "Enabled",
+    "lastUpdated": "Last updated {ago} by {by}",
+    "save": "Save changes",
+    "reasonHint": "Reason for change (≥ 10 characters)",
+    "preview": "Preview",
+    "history": "Change history",
+    "historyEmpty": "No pricing changes yet."
+  },
+  "usageToggle": {
+    "title": "Customer usage dashboard",
+    "subtitle": "Show real-time token usage and cost per model to your subscribers in the mobile app.",
+    "enabled": "Visible to subscribers",
+    "disabled": "Hidden from subscribers",
+    "lastUpdated": "Last updated {ago} by {by}",
+    "toggleOn": "Customer usage dashboard enabled",
+    "toggleOff": "Customer usage dashboard disabled"
+  },
+  "audit": {
+    "title": "Audit Log",
+    "subtitle": "Immutable, append-only. Every write is logged before the response is sent.",
+    "filters": {
+      "action": "Action",
+      "actor": "Actor",
+      "range": "Range"
+    },
+    "columns": {
+      "time": "Time",
+      "actor": "Actor",
+      "action": "Action",
+      "target": "Target",
+      "reason": "Reason"
+    },
+    "actions": {
+      "login": "Login",
+      "quotaOverride": "Quota override",
+      "userStatus": "User status change",
+      "providerToggle": "Provider toggle",
+      "tierChange": "Tier change",
+      "modelToggle": "Model toggle",
+      "sessionRevoked": "Session revoked",
+      "tier": { "update": "Tier updated" },
+      "model": { "toggle": "Model toggled" },
+      "usage": { "toggle": "Usage dashboard toggled" },
+      "legal": {
+        "publish": "Legal version published",
+        "restore": "Legal version restored",
+        "delete": "Legal version deleted"
+      },
+      "support": {
+        "reply": "Support reply sent",
+        "close": "Ticket closed"
+      }
+    }
+  },
+  "account": {
+    "title": "Admin Account",
+    "subtitle": "Profile, two-factor authentication, and active sessions.",
+    "profile": "Profile",
+    "totp": "Two-factor authentication",
+    "totpEnabled": "Enabled",
+    "totpDisabled": "Disabled",
+    "enableTotp": "Enable TOTP",
+    "sessions": "Active sessions",
+    "current": "Current session",
+    "revoke": "Revoke",
+    "revokeAllOthers": "Revoke all other sessions",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "language": "Language",
+      "theme": "Theme"
+    },
+    "save": "Save profile"
+  },
+  "systemStates": {
+    "title": "System States",
+    "subtitle": "Reference pages for empty, error, offline, and maintenance states.",
+    "tabs": {
+      "forbidden": "Forbidden",
+      "error": "Server error",
+      "maintenance": "Maintenance",
+      "empty": "Empty",
+      "offline": "Offline"
+    },
+    "forbidden": {
+      "title": "Access denied",
+      "body": "You don't have permission to view this page.",
+      "cta": "Back to overview"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "body": "An unexpected error occurred. The incident has been logged.",
+      "cta": "Try again"
+    },
+    "maintenance": {
+      "title": "Scheduled maintenance",
+      "body": "Maintenance is in progress. The dashboard will return shortly.",
+      "cta": "Refresh"
+    },
+    "empty": {
+      "title": "Nothing here yet",
+      "body": "When events arrive, you'll see them appear here.",
+      "cta": "Refresh"
+    },
+    "offline": {
+      "title": "You're offline",
+      "body": "We couldn't reach the server. Check your connection.",
+      "cta": "Retry"
+    }
+  },
+  "confirm": {
+    "generic": {
+      "title": "Confirm",
+      "body": "Are you sure you want to continue?",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    }
+  },
+  "toast": {
+    "saved": "Saved",
+    "savedDetail": "Your changes have been applied.",
+    "overrideApplied": "Quota override applied",
+    "userSuspended": "User suspended",
+    "userReactivated": "User reactivated",
+    "providerDisabled": "Provider disabled",
+    "providerEnabled": "Provider enabled",
+    "tiersPublished": "Tier configuration published",
+    "tiersReset": "Tiers reset to defaults",
+    "legalPublished": "New version published",
+    "legalRestored": "Version restored",
+    "legalDeleted": "Version deleted"
+  },
+  "table": {
+    "sortAsc": "Sort ascending",
+    "sortDesc": "Sort descending",
+    "empty": "No results."
+  },
+  "legal": {
+    "title": {
+      "heading": "Legal",
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy"
+    },
+    "subtitle": "Manage versions of the Terms & Conditions and Privacy Policy.",
+    "tabs": {
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy"
+    },
+    "currentVersion": "Current version",
+    "editor": "Editor",
+    "preview": "Preview",
+    "view": "View document",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "saveNewVersion": "Save new version",
+    "restore": "Restore",
+    "delete": "Delete",
+    "reasonRequired": "Reason required (≥ 10 characters)",
+    "versionHistory": "Version history",
+    "deleteConfirm": "Delete this version?",
+    "restoreConfirm": "Restore this version as current?",
+    "summaryPlaceholder": "Short summary of this version",
+    "versionLabel": "Version",
+    "isCurrent": "Current",
+    "emptyBody": "Write the document in the editor. Markdown is supported."
+  },
+  "errors": {
+    "reasonRequired": "Reason required (≥ 10 characters)",
+    "versionNotFound": "Version not found",
+    "cannotDeleteOnly": "Cannot delete the only version",
+    "cannotDeleteCurrent": "Cannot delete the current version"
+  },
+  "notFound": {
+    "title": "Not found",
+    "body": "Page not found.",
+    "cta": "Back to overview"
+  },
+  "globalError": {
+    "title": "Something went wrong",
+    "body": "An unexpected error occurred.",
+    "cta": "Try again"
+  },
+  "legalPages": {
+    "termsSubtitle": "Manage versions of the Terms & Conditions document.",
+    "privacySubtitle": "Manage versions of the Privacy Policy document."
+  },
+  "supportTicket": {
+    "metadataOnly": "Ticket metadata only — see the audit log for all admin actions.",
+    "opened": "Opened",
+    "updated": "Updated"
+  },
+  "quotaCard": {
+    "requestsThisMonth": "Requests this month",
+    "spend30d": "30d spend"
+  },
+  "dataTable": {
+    "empty": "No results.",
+    "searchPlaceholder": "Search"
+  },
+  "actions": {
+    "view": "View",
+    "edit": "Edit",
+    "suspend": "Suspend",
+    "reactivate": "Reactivate",
+    "reply": "Reply",
+    "resolve": "Resolve",
+    "enable": "Enable",
+    "disable": "Disable",
+    "revoke": "Revoke"
+  },
+  "totp": {
+    "qrHint": "Scan the QR placeholder with your authenticator app.",
+    "secretLabel": "Secret",
+    "code": "Code",
+    "remaining": "{seconds}s remaining",
+    "scanInstructions": "Scan with Google Authenticator, 1Password, Authy, etc.",
+    "verify": "Verify code",
+    "regenerateConfirmTitle": "Regenerate recovery codes",
+    "regenerateConfirmBody": "Your existing recovery codes will stop working. Continue?",
+    "regenerateConfirmAction": "Regenerate"
+  },
+  "recovery": {
+    "reveal": "Reveal",
+    "hide": "Hide",
+    "regenerate": "Regenerate",
+    "shown": "Visible",
+    "hidden": "Hidden",
+    "copyAll": "Copy all"
+  },
+  "twoFactor": {
+    "enabled": "Two-factor authentication",
+    "disabled": "Two-factor disabled",
+    "enable": "Enable 2FA",
+    "disable": "Disable 2FA",
+    "email": "2FA email",
+    "emailHint": "A separate email used for 6-digit verification codes. We'll only send codes to this address.",
+    "sendCode": "Send verification code",
+    "code": "Verification code",
+    "codeHint": "Enter the 6-digit code sent to your 2FA email.",
+    "verify": "Verify",
+    "resend": "Resend code",
+    "verified": "Verified",
+    "notVerified": "Not verified",
+    "updateEmail": "Update 2FA email",
+    "invalidEmail": "Enter a valid email address.",
+    "codeMismatch": "That code is incorrect. Try again.",
+    "codeExpired": "That code has expired. Request a new one.",
+    "tooManyAttempts": "Too many attempts. Request a new code.",
+    "loginVerifyTitle": "Verify your sign-in",
+    "loginVerifyBody": "We sent a 6-digit code to your 2FA email. For this demo, your code is: {code}",
+    "codeLabel": "6-digit code",
+    "submit": "Continue",
+    "back": "Back"
+  }
+}
