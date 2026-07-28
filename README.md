@@ -29,8 +29,8 @@ npm install
 npm run dev
 ```
 
-Then open http://localhost:3000/login (any value signs you in for the
-demo build).
+The dev launcher selects an available local port and prints the URL (any
+value signs you in for the demo build).
 
 ## Scripts
 

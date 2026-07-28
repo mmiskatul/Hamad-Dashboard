@@ -20,7 +20,7 @@ vi.mock("next/server", () => ({
   },
 }));
 
-import { middleware } from "@/middleware";
+import { proxy } from "@/proxy";
 
 function makeRequest(pathname: string) {
   const url = new URL(`http://localhost${pathname}`);
@@ -30,7 +30,7 @@ function makeRequest(pathname: string) {
   return {
     nextUrl,
     headers,
-  } as unknown as Parameters<typeof middleware>[0];
+  } as unknown as Parameters<typeof proxy>[0];
 }
 
 describe("locale middleware", () => {
@@ -40,13 +40,13 @@ describe("locale middleware", () => {
   });
 
   it("passes through when there is no locale prefix", () => {
-    middleware(makeRequest("/admin/users"));
+    proxy(makeRequest("/admin/users"));
     expect(next).toHaveBeenCalledTimes(1);
     expect(rewrite).not.toHaveBeenCalled();
   });
 
   it("rewrites /en/admin → /admin with the next-intl locale header on the request", () => {
-    const res = middleware(makeRequest("/en/admin")) as unknown as {
+    const res = proxy(makeRequest("/en/admin")) as unknown as {
       _init: { request: { headers: Headers } } | undefined;
       cookies: { set: ReturnType<typeof vi.fn> };
     };
@@ -56,7 +56,7 @@ describe("locale middleware", () => {
   });
 
   it("rewrites /ar/admin/users → /admin/users and sets the AR cookie", () => {
-    const res = middleware(makeRequest("/ar/admin/users")) as unknown as {
+    const res = proxy(makeRequest("/ar/admin/users")) as unknown as {
       _init: { request: { headers: Headers } } | undefined;
       cookies: { set: ReturnType<typeof vi.fn> };
     };
@@ -70,7 +70,7 @@ describe("locale middleware", () => {
   });
 
   it("does not strip a non-locale prefix", () => {
-    middleware(makeRequest("/admin/users"));
+    proxy(makeRequest("/admin/users"));
     expect(next).toHaveBeenCalled();
     expect(rewrite).not.toHaveBeenCalled();
   });

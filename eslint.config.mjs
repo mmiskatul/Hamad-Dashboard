@@ -1,16 +1,17 @@
-import { FlatCompat } from "@eslint/eslintrc";
-import tsParser from "@typescript-eslint/parser";
-import tsPlugin from "@typescript-eslint/eslint-plugin";
-
-const compat = new FlatCompat({ baseDirectory: import.meta.dirname });
-
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTypescript from "eslint-config-next/typescript";
 export default [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...nextVitals,
+  ...nextTypescript,
   {
     files: ["**/*.{ts,tsx}"],
-    languageOptions: { parser: tsParser },
-    plugins: { "@typescript-eslint": tsPlugin },
     rules: {
+      // These React Compiler diagnostics are advisory for this existing app;
+      // keep the project lint focused on correctness and its RTL/privacy rules.
+      "react-hooks/set-state-in-effect": "off",
+      "react-hooks/purity": "off",
+      "react-hooks/immutability": "off",
+      "react-hooks/incompatible-library": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "react/no-unescaped-entities": "off",
       "@typescript-eslint/no-unused-vars": [

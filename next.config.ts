@@ -25,9 +25,7 @@ const buildDir = process.env.BUILD_DIR
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  experimental: {
-    typedRoutes: false,
-  },
+  typedRoutes: false,
   ...(buildDir ? { distDir: path.relative(process.cwd(), buildDir) } : {}),
   images: {
     dangerouslyAllowSVG: true,

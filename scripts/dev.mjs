@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Cross-platform dev launcher. Finds the first free port in [start, start+19]
- * and spawns `next dev --port <port>` directly. Replaces the shell `$(cat ...)`
- * pipeline so it works on Windows + POSIX shells without a POSIX toolchain.
+ * Cross-platform dev launcher. Uses an OS-assigned free port by default, or
+ * finds the first free port in [start, start+19] when a start port is given.
+ * It spawns `next dev --port <port>` directly.
  *
  * Usage: node scripts/dev.mjs [startPort] [--clean] [--no-clean-stale]
  *   --clean            Wipe .next and dev marker files before launching.
@@ -22,7 +22,7 @@ const clean = rawArgs.includes("--clean");
 const noCleanStale = rawArgs.includes("--no-clean-stale");
 // Pull the optional start port (first non-flag arg).
 const positional = rawArgs.filter((a) => !a.startsWith("--"));
-const start = Number(positional[0] ?? 3000);
+const requestedStart = positional[0] ? Number(positional[0]) : null;
 // Extra args we want to forward to `next dev` (e.g. user-supplied flags).
 const passthrough = rawArgs.filter(
   (a) => !a.startsWith("--") || a === String(start),
@@ -92,14 +92,32 @@ function isFree(port) {
   });
 }
 
+function getEphemeralPort() {
+  return new Promise((resolve, reject) => {
+    const srv = net.createServer();
+    srv.unref();
+    srv.once("error", reject);
+    srv.listen(0, "0.0.0.0", () => {
+      const address = srv.address();
+      const port = typeof address === "object" && address ? address.port : 0;
+      srv.close(() => resolve(port));
+    });
+  });
+}
+
 const tried = [];
 let port = null;
-for (let p = start; p < start + 20; p++) {
-  tried.push(p);
-  // eslint-disable-next-line no-await-in-loop
-  if (await isFree(p)) {
-    port = p;
-    break;
+if (requestedStart === null) {
+  port = await getEphemeralPort();
+  tried.push(port);
+} else {
+  for (let p = requestedStart; p < requestedStart + 20; p++) {
+    tried.push(p);
+    // eslint-disable-next-line no-await-in-loop
+    if (await isFree(p)) {
+      port = p;
+      break;
+    }
   }
 }
 if (port === null) {
@@ -126,7 +144,7 @@ const nextBin = path.join(
   "bin",
   "next",
 );
-const nextArgs = ["dev", "--port", String(port), ...passthrough.filter((a) => a !== String(start))];
+const nextArgs = ["dev", "--port", String(port), ...passthrough.filter((a) => a !== String(requestedStart))];
 const child = spawn(
   process.execPath, // node
   [nextBin, ...nextArgs],
