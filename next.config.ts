@@ -34,17 +34,6 @@ const nextConfig: NextConfig = {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  // Tailwind v4 beta's PostCSS loader emits "Invalid dependencies" warnings on
-  // Windows because the dependency-reporting chokes on relative paths the
-  // loader passes through. The warning is non-fatal; suppress it.
-  webpack: (config) => {
-    config.ignoreWarnings = [
-      ...(config.ignoreWarnings ?? []),
-      { module: /node_modules\/(tailwindcss|@tailwindcss)\/.*/, message: /Invalid dependencies/ },
-      { module: /postcss-loader/, message: /Invalid dependencies/ },
-    ];
-    return config;
-  },
 };
 
 export default withNextIntl(nextConfig);

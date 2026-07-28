@@ -2,13 +2,16 @@
   "name": "oneai-admin-dashboard",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "dev:clean": "node scripts/dev.mjs 3000 --clean",
     "dev:fixed": "node scripts/dev.mjs 3020",
     "build": "node scripts/build.mjs build",
     "start": "node scripts/build.mjs start",
-    "lint": "next lint",
+    "lint": "eslint src tests scripts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -33,8 +36,8 @@
     "date-fns": "4.1.0",
     "decimal.js": "10.4.3",
     "lucide-react": "0.453.0",
-    "next": "15.3.9",
-    "next-intl": "3.25.0",
+    "next": "16.2.12",
+    "next-intl": "4.13.4",
     "next-themes": "0.3.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -59,7 +62,7 @@
     "@vitejs/plugin-react": "4.3.2",
     "autoprefixer": "10.4.20",
     "eslint": "9.12.0",
-    "eslint-config-next": "15.3.9",
+    "eslint-config-next": "16.2.12",
     "jsdom": "25.0.1",
     "postcss": "8.4.47",
     "prettier": "3.3.3",
