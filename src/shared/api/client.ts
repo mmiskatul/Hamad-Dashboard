@@ -1,6 +1,6 @@
 /**
  * Single point that materialises data. All readers route through `api.get`
- * which today reads from `/src/data/*.json` and tomorrow can be swapped to
+ * which today reads from `/src/data/*.json` and can be swapped to
  * `fetch(API_BASE_URL + path)` without touching the rest of the app.
  */
 import { adminProjection } from "@/shared/lib/privacy";
@@ -28,6 +28,10 @@ import type {
   Tier,
   AdminProfile,
 } from "./types";
+
+export const API_BASE_URL = (
+  process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:4000/api/v1"
+).replace(/\/$/, "");
 
 type PathMap = {
   overview: () => Promise<OverviewStats>;
