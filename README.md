@@ -1,6 +1,6 @@
 # OneAI Admin Dashboard
 
-Single super-admin dashboard for the OneAI Hub platform. Next.js 15 (App
+Single super-admin dashboard for the OneAI Hub platform. Next.js 16 (App
 Router) + React 19 + TypeScript, with TanStack Query / Table / Virtual,
 Recharts, next-intl, Radix UI primitives, Tailwind v4.
 
@@ -12,14 +12,14 @@ source of truth for the design language.
 
 | Layer | Choice |
 |---|---|
-| Framework | Next.js 15 App Router + TypeScript |
+| Framework | Next.js 16 App Router + TypeScript |
 | Styling | Tailwind v4 + CSS custom properties generated from §2 |
 | Server state | TanStack Query |
 | Tables | TanStack Table + Virtual |
 | Charts | Recharts (wrapped in `ChartWrapper`) |
 | i18n | `next-intl` (EN + AR, native RTL) |
 | Forms | React Hook Form + Zod |
-| Auth | Cookie session, mocked for the demo |
+| Auth | Fastify admin sessions + HttpOnly access/refresh/session cookies |
 
 ## Run
 
@@ -29,8 +29,17 @@ npm install
 npm run dev
 ```
 
-The dev launcher selects an available local port and prints the URL (any
-value signs you in for the demo build).
+The dev launcher selects an available local port and prints the URL. Set
+`BACKEND_API_BASE_URL` to the Fastify `/api/v1` base URL. The backend creates
+the first administrator from its `ADMIN_SEED_EMAIL`, `ADMIN_SEED_PASSWORD`,
+and optional `ADMIN_SEED_NAME` environment variables. Login credentials are
+validated by Fastify; issued tokens remain in server-managed HttpOnly cookies.
+
+The access JWT is short-lived. When it expires, `src/proxy.ts` sends a normal
+page navigation through `/api/auth/refresh`, which rotates the refresh token
+and restores the requested localized route. Logout revokes the MongoDB session
+before clearing all three cookies. Router prefetch requests are excluded from
+refresh so concurrent prefetches cannot replay and revoke a rotating token.
 
 ## Scripts
 

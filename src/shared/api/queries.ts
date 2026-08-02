@@ -62,7 +62,41 @@ export const useConfigModels = () => useQuery({ queryKey: qk.configModels, query
 export const useConfigTiers = () => useQuery({ queryKey: qk.configTiers, queryFn: () => api.get("configTiers") });
 export const usePlanDefaults = () => useQuery({ queryKey: qk.planDefaults, queryFn: () => api.get("planDefaults") });
 export const useAudit = () => useQuery({ queryKey: qk.audit, queryFn: () => api.get("audit") });
-export const useAccount = () => useQuery({ queryKey: qk.account, queryFn: () => api.get("account") });
+export const useAccount = () =>
+  useQuery({
+    queryKey: qk.account,
+    queryFn: async () => {
+      const [account, response] = await Promise.all([
+        api.get("account"),
+        fetch("/api/auth/account", { cache: "no-store" }),
+      ]);
+      if (!response.ok) throw new Error("Administrator session expired.");
+      const auth = (await response.json()) as {
+        user: { id: string; email: string; name: string };
+        sessions: {
+          id: string;
+          lastUsedAt: string;
+          current: boolean;
+          userAgent?: string;
+          ipAddress?: string;
+        }[];
+      };
+      return {
+        ...account,
+        id: auth.user.id,
+        name: auth.user.name,
+        email: auth.user.email,
+        sessions: auth.sessions.map((session) => ({
+          id: session.id,
+          device: session.userAgent ?? "Unknown device",
+          location: "—",
+          ip: session.ipAddress ?? "—",
+          lastActiveAt: session.lastUsedAt,
+          current: session.current,
+        })),
+      };
+    },
+  });
 export const useTotpSecret = () =>
   useQuery({
     queryKey: [...qk.account, "totp-secret"] as const,
@@ -201,11 +235,14 @@ export const useSetTotpEnabled = () => {
 export const useRevokeSession = () => {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (payload: { sessionId: string; actor?: string }) =>
-      api.revokeSession(payload.sessionId, payload.actor ?? "admin@oneai.app"),
-    onSuccess: (data) => {
-      qc.setQueryData(qk.account, data);
-      qc.invalidateQueries({ queryKey: qk.audit });
+    mutationFn: async (payload: { sessionId: string; actor?: string }) => {
+      const response = await fetch(`/api/auth/sessions/${encodeURIComponent(payload.sessionId)}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) throw new Error("Unable to revoke session.");
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: qk.account });
     },
   });
 };
@@ -213,10 +250,12 @@ export const useRevokeSession = () => {
 export const useRevokeAllOtherSessions = () => {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: () => api.revokeAllOtherSessions(),
-    onSuccess: (data) => {
-      qc.setQueryData(qk.account, data);
-      qc.invalidateQueries({ queryKey: qk.audit });
+    mutationFn: async () => {
+      const response = await fetch("/api/auth/sessions/revoke-others", { method: "POST" });
+      if (!response.ok) throw new Error("Unable to revoke other sessions.");
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: qk.account });
     },
   });
 };
@@ -267,11 +306,12 @@ export const useDisableTwoFactor = () => {
   });
 };
 
-/** Stub: clears the local admin session cookie and reloads. */
+/** Revoke the backend session, clear HttpOnly cookies, and return to login. */
 export function logout() {
   if (typeof document !== "undefined") {
-    document.cookie = "admin_session=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
-    window.location.href = "/login";
+    void fetch("/api/auth/logout", { method: "POST" }).finally(() => {
+      window.location.href = "/login";
+    });
   }
 }
 

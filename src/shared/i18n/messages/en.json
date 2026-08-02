@@ -81,7 +81,7 @@
     "verify": "Verify & sign in",
     "recovery": "Use a recovery code",
     "lockout": "5 attempts before lockout",
-    "demoHint": "Demo build — any value will sign you in."
+    "demoHint": "Use the administrator credentials configured on the backend."
   },
   "overview": {
     "title": "Overview",
