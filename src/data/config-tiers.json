@@ -4,8 +4,8 @@
     "name": "Free",
     "monthlyUsd": 0,
     "requestsLimit": 50,
-    "tokensLimit": 1000,
-    "models": ["gpt", "grok"],
+    "tokensLimit": 50000,
+    "models": ["gpt", "deepseek"],
     "features": {
       "fileUpload": false,
       "voice": false,
@@ -15,10 +15,10 @@
   {
     "id": "pro",
     "name": "Pro",
-    "monthlyUsd": 5,
+    "monthlyUsd": 20,
     "requestsLimit": 500,
-    "tokensLimit": 4000,
-    "models": ["gpt", "grok", "gemini", "deepseek"],
+    "tokensLimit": 500000,
+    "models": ["gpt", "deepseek", "gemini", "perplexity"],
     "features": {
       "fileUpload": true,
       "voice": true,
@@ -28,9 +28,9 @@
   {
     "id": "business",
     "name": "Business",
-    "monthlyUsd": 24,
-    "requestsLimit": -1,
-    "tokensLimit": 8000,
+    "monthlyUsd": 50,
+    "requestsLimit": 2000,
+    "tokensLimit": 1500000,
     "models": ["gpt", "grok", "gemini", "deepseek", "claude", "perplexity"],
     "features": {
       "fileUpload": true,
