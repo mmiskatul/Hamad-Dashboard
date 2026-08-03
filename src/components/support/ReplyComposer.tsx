@@ -16,7 +16,6 @@ export function ReplyComposer({
   userEmail: string;
 }) {
   const t = useTranslations("support");
-  const tc = useTranslations("common");
   const [body, setBody] = useState("");
   const post = usePostReply(ticketId);
   const close = useCloseTicket();
@@ -48,8 +47,13 @@ export function ReplyComposer({
   };
 
   const onDraft = () => {
+    // Save-draft is intentionally a local-only affordance until a draft
+    // endpoint ships; we surface a clarifying toast rather than claim it
+    // is persisted server-side.
     toast.success(t("draftSavedToast"));
   };
+
+  const sending = post.isPending || close.isPending;
 
   return (
     <Card>
@@ -62,23 +66,23 @@ export function ReplyComposer({
           onChange={(e) => setBody(e.target.value)}
           placeholder={t("replyPlaceholder", { email: userEmail })}
           className="min-h-[120px]"
+          disabled={sending}
         />
         <div className="flex flex-wrap items-center justify-end gap-2">
-          <Button variant="ghost" onClick={onDraft}>
+          <Button variant="ghost" onClick={onDraft} disabled={sending}>
             {t("saveDraft")}
           </Button>
-          <Button variant="outline" onClick={onSendAndClose}>
+          <Button variant="outline" onClick={onSendAndClose} disabled={sending}>
             {t("sendAndClose")}
           </Button>
           <Button
             variant="primary"
             onClick={onSend}
-            disabled={!body.trim() || post.isPending}
+            disabled={!body.trim() || sending}
           >
             {t("send")}
           </Button>
         </div>
-        <p className="text-[11px] text-[var(--text-secondary)]">{tc("comingSoon")}: persistence layer is mocked.</p>
       </CardBody>
     </Card>
   );

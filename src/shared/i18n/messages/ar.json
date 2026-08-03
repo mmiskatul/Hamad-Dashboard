@@ -34,6 +34,7 @@
     "copyId": "نسخ المعرّف",
     "copied": "تم النسخ",
     "expiresIn": "ينتهي خلال {days} يوم",
+    "error": "حدث خطأ ما",
     "billed": "الفوترة شهرية",
     "renews": "يتجدد في {date}"
   },
@@ -230,6 +231,8 @@
     "grantTokensSuccess": "تم منح الرموز بنجاح",
     "grantTokensError": "فشل منح الرموز",
     "grantTokensNoReason": "بدون سبب",
+    "userSuspended": "تم تعليق المستخدم",
+    "userReactivated": "تمت إعادة تنشيط المستخدم",
     "override": {
       "reasonHint": "اشرح لماذا هذا الإجراء مطلوب (مرئي للمدققين)."
     },
@@ -353,7 +356,7 @@
     "replyPlaceholder": "اكتب رداً إلى {email}…",
     "sentToast": "تم إرسال الرد إلى {email}",
     "closedToast": "تم إغلاق التذكرة",
-    "draftSavedToast": "تم حفظ المسودة (تجريبي)",
+    "draftSavedToast": "تم الاحتفاظ بالمسودة في هذه الجلسة فقط",
     "attachments": {
       "title": "مرفق",
       "expires": "ينتهي خلال {days} يوماً"

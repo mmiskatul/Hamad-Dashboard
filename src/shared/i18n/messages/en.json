@@ -34,6 +34,7 @@
     "copyId": "Copy ID",
     "copied": "Copied",
     "expiresIn": "expires in {days} days",
+    "error": "Something went wrong",
     "billed": "Billed monthly",
     "renews": "Renews on {date}"
   },
@@ -230,6 +231,8 @@
     "grantTokensSuccess": "Tokens granted successfully",
     "grantTokensError": "Failed to grant tokens",
     "grantTokensNoReason": "No reason provided",
+    "userSuspended": "User suspended",
+    "userReactivated": "User reactivated",
     "override": {
       "reasonHint": "Explain why this action is needed (visible to auditors)."
     },
@@ -353,7 +356,7 @@
     "replyPlaceholder": "Write a reply to {email}…",
     "sentToast": "Reply sent to {email}",
     "closedToast": "Ticket closed",
-    "draftSavedToast": "Draft saved (mocked)",
+    "draftSavedToast": "Draft kept in this session only",
     "attachments": {
       "title": "Attachment",
       "expires": "Expires in {days} days"

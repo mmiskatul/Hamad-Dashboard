@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Download, Plus } from "lucide-react";
 import { useUsers, useCreateUser } from "@/shared/api/queries";
@@ -7,6 +7,7 @@ import { UserTable } from "@/features/users/UserTable";
 import { UserFilters } from "@/features/users/UserFilters";
 import { CreateUserModal } from "@/components/modals/CreateUserModal";
 import { Button } from "@/components/ui/button";
+import { exportUsersToCsv } from "@/shared/lib/csv";
 
 export default function UsersPage() {
   const t = useTranslations("users");
@@ -18,18 +19,19 @@ export default function UsersPage() {
   const [tier, setTier] = useState("any");
   const [status, setStatus] = useState("any");
 
-  const filtered = (users.data ?? []).filter((u) => {
-    if (tier !== "any" && u.tier !== tier) return false;
-    if (status !== "any" && u.status !== status) return false;
-    if (search && !u.email.toLowerCase().includes(search.toLowerCase()) && !u.name.toLowerCase().includes(search.toLowerCase())) {
-      return false;
-    }
-    return true;
-  });
+  const filtered = useMemo(() => {
+    return (users.data ?? []).filter((u) => {
+      if (tier !== "any" && u.tier !== tier) return false;
+      if (status !== "any" && u.status !== status) return false;
+      if (search && !u.email.toLowerCase().includes(search.toLowerCase()) && !u.name.toLowerCase().includes(search.toLowerCase())) {
+        return false;
+      }
+      return true;
+    });
+  }, [users.data, tier, status, search]);
 
   const handleExport = () => {
-    // Placeholder export handler.
-    console.log("Export users", { count: filtered.length });
+    exportUsersToCsv(filtered, `users-${new Date().toISOString().slice(0, 10)}.csv`);
   };
 
   return (

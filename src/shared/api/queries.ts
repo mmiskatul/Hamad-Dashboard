@@ -3,6 +3,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/shared/api/client";
 import type {
   ModelConfig,
+  QuotaHistoryEntry,
+  QuotaOverride,
   SupportReply,
   TierConfig,
   UnitPricingConfig,
@@ -337,6 +339,75 @@ export const useUpdateUnitPricing = () => {
       ),
     onSuccess: (data: UnitPricingConfig) => {
       qc.setQueryData(qk.unitPricing, data);
+      qc.invalidateQueries({ queryKey: qk.audit });
+    },
+  });
+};
+
+export const useSetUserStatus = (userId: string) => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: { status: UserStatus; reason: string; actor?: string }) =>
+      api.suspendUser(userId, payload.status, payload.reason, payload.actor ?? "admin@oneai.app"),
+    onSuccess: (user: UserSummary) => {
+      qc.setQueryData<UserSummary[]>(qk.users, (current) =>
+        current?.map((item) => (item.id === user.id ? { ...item, ...user } : item)),
+      );
+      qc.invalidateQueries({ queryKey: qk.user(userId) });
+      qc.invalidateQueries({ queryKey: qk.users });
+      qc.invalidateQueries({ queryKey: qk.audit });
+    },
+  });
+};
+
+export const useGrantUserQuota = (userId: string) => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: { amount: number; reason: string; actor?: string }) =>
+      api.grantUserQuota(userId, payload.amount, payload.reason, payload.actor ?? "admin@oneai.app"),
+    onSuccess: ({ user, entry }: { user: UserSummary; entry: QuotaHistoryEntry }) => {
+      qc.setQueryData<UserSummary[]>(qk.users, (current) =>
+        current?.map((item) => (item.id === user.id ? { ...item, ...user } : item)),
+      );
+      qc.setQueryData(qk.user(userId), (current: Record<string, unknown> | undefined) => ({
+        ...current,
+        ...user,
+        quotaHistory: [entry, ...((current?.quotaHistory as QuotaHistoryEntry[] | undefined) ?? [])],
+      }));
+      qc.invalidateQueries({ queryKey: qk.audit });
+    },
+  });
+};
+
+export const useSetUserQuotaOverride = (userId: string) => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: { override: Omit<QuotaOverride, "setAt">; actor?: string }) =>
+      api.setUserQuotaOverride(userId, payload.override, payload.actor ?? "admin@oneai.app"),
+    onSuccess: ({ user, override }: { user: UserSummary; override: QuotaOverride }) => {
+      qc.setQueryData<UserSummary[]>(qk.users, (current) =>
+        current?.map((item) => (item.id === user.id ? { ...item, ...user } : item)),
+      );
+      qc.setQueryData(qk.user(userId), (current: Record<string, unknown> | undefined) => ({
+        ...current,
+        ...user,
+        quotaOverride: override,
+      }));
+      qc.invalidateQueries({ queryKey: qk.audit });
+    },
+  });
+};
+
+export const useResetUserQuotaOverride = (userId: string) => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: { reason?: string; actor?: string } = {}) =>
+      api.resetUserQuotaOverride(userId, payload.reason, payload.actor),
+    onSuccess: (user: UserSummary) => {
+      qc.setQueryData<UserSummary[]>(qk.users, (current) =>
+        current?.map((item) => (item.id === user.id ? { ...item, ...user } : item)),
+      );
+      qc.invalidateQueries({ queryKey: qk.user(userId) });
       qc.invalidateQueries({ queryKey: qk.audit });
     },
   });

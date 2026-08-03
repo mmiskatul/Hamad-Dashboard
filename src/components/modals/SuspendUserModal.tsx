@@ -1,7 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Label, Textarea } from "@/components/ui/input";
@@ -11,15 +10,41 @@ export function SuspendUserModal({
   onOpenChange,
   onSubmit,
   isSuspended,
+  submitting = false,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSubmit: (reason: string) => void;
+  onSubmit: (reason: string) => void | Promise<void>;
   isSuspended: boolean;
+  submitting?: boolean;
 }) {
   const t = useTranslations("userDetail");
   const tc = useTranslations("common");
   const [reason, setReason] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      setReason("");
+      setBusy(false);
+    }
+  }, [open]);
+
+  const isValid = reason.trim().length >= 10 && !busy && !submitting;
+
+  const handleConfirm = async () => {
+    if (!isValid) return;
+    setBusy(true);
+    try {
+      await onSubmit(reason.trim());
+      onOpenChange(false);
+    } catch {
+      // Modal stays open so the admin can retry.
+    } finally {
+      setBusy(false);
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent ariaLabel={isSuspended ? t("reactivateTitle") : t("suspendTitle")}>
@@ -36,20 +61,19 @@ export function SuspendUserModal({
             onChange={(e) => setReason(e.target.value)}
             className="mt-2"
             placeholder={t("override.reasonHint")}
+            disabled={busy || submitting}
+            aria-invalid={reason.length > 0 && reason.trim().length < 10}
           />
         </div>
         <DialogFooter>
-          <Button variant="ghost" onClick={() => onOpenChange(false)}>
+          <Button variant="ghost" onClick={() => onOpenChange(false)} disabled={busy || submitting}>
             {tc("cancel")}
           </Button>
           <Button
             variant={isSuspended ? "primary" : "danger"}
-            disabled={reason.trim().length < 10}
-            onClick={() => {
-              onSubmit(reason);
-              toast.success(isSuspended ? "userReactivated" : "userSuspended");
-              onOpenChange(false);
-            }}
+            disabled={!isValid}
+            onClick={handleConfirm}
+            data-testid="suspend-confirm"
           >
             {isSuspended ? t("reactivateConfirm") : t("suspendConfirm")}
           </Button>

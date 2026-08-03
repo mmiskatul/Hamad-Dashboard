@@ -8,6 +8,8 @@ import type {
   ModelId,
   OverviewStats,
   ProviderHealth,
+  QuotaHistoryEntry,
+  QuotaOverride,
   RevenueData,
   SupportReply,
   Tier,
@@ -160,6 +162,23 @@ export const api = {
   async createUser(payload: { name: string; email: string; tier: 'free' | 'pro' | 'business'; status: 'active' | 'suspended' | 'grace' }, actor = 'admin@oneai.app'): Promise<UserSummary> {
     return requestJson<UserSummary>('/users', { method: 'POST', body: JSON.stringify({ ...payload, actor }) });
   },
+
+  async suspendUser(userId: string, status: 'active' | 'suspended' | 'grace', reason: string, actor = 'admin@oneai.app'): Promise<UserSummary> {
+    return requestJson<UserSummary>(`/users/${encodeURIComponent(userId)}/status`, { method: 'POST', body: JSON.stringify({ status, reason, actor }) });
+  },
+
+  async grantUserQuota(userId: string, amount: number, reason: string, actor = 'admin@oneai.app'): Promise<{ user: UserSummary; entry: QuotaHistoryEntry }> {
+    return requestJson<{ user: UserSummary; entry: QuotaHistoryEntry }>(`/users/${encodeURIComponent(userId)}/quota-grant`, { method: 'POST', body: JSON.stringify({ amount, reason, actor }) });
+  },
+
+  async setUserQuotaOverride(userId: string, override: Omit<QuotaOverride, 'setAt'>, actor = 'admin@oneai.app'): Promise<{ user: UserSummary; override: QuotaOverride }> {
+    return requestJson<{ user: UserSummary; override: QuotaOverride }>(`/users/${encodeURIComponent(userId)}/quota-override`, { method: 'POST', body: JSON.stringify({ ...override, actor }) });
+  },
+
+  async resetUserQuotaOverride(userId: string, reason = 'Quota override cleared', actor = 'admin@oneai.app'): Promise<UserSummary> {
+    return requestJson<UserSummary>(`/users/${encodeURIComponent(userId)}/quota-override`, { method: 'DELETE', body: JSON.stringify({ reason, actor }) });
+  },
+
 
   async appendAudit(entry: Omit<AuditEntry, 'id'>): Promise<AuditEntry> {
     return requestJson<AuditEntry>('/audit', { method: 'POST', body: JSON.stringify(entry) });

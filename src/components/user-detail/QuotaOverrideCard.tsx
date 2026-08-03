@@ -22,11 +22,13 @@ export function QuotaOverrideCard({
   actorName,
   onSave,
   onReset,
+  saving = false,
 }: {
   current: QuotaOverride | null;
   actorName: string;
-  onSave: (next: QuotaOverride) => void;
-  onReset: () => void;
+  onSave: (next: QuotaOverride) => void | Promise<void>;
+  onReset: () => void | Promise<void>;
+  saving?: boolean;
 }) {
   const t = useTranslations("userDetail");
   const tc = useTranslations("common");
@@ -39,6 +41,7 @@ export function QuotaOverrideCard({
     current?.customTokensLimit != null ? String(current.customTokensLimit) : "",
   );
   const [reason, setReason] = useState<string>(current?.reason ?? "");
+  const [submitting, setSubmitting] = useState(false);
 
   // When the underlying override changes (e.g. after Reset), refresh local state.
   useEffect(() => {
@@ -59,14 +62,15 @@ export function QuotaOverrideCard({
   const tokensValid =
     parsedTokens === undefined || (Number.isFinite(parsedTokens) && parsedTokens >= 0);
   const reasonValid = reason.trim().length > 0;
-  const isValid = requestsValid && tokensValid && reasonValid;
+  const isValid = requestsValid && tokensValid && reasonValid && !submitting && !saving;
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!reasonValid) {
       toast.error(t("quotaOverride.errorReasonRequired"));
       return;
     }
     if (!isValid) return;
+    setSubmitting(true);
     const next: QuotaOverride = {
       bypassQuota,
       customRequestsLimit: parsedRequests,
@@ -75,13 +79,26 @@ export function QuotaOverrideCard({
       setBy: actorName,
       setAt: new Date().toISOString(),
     };
-    onSave(next);
-    toast.success(t("quotaOverride.successSave"));
+    try {
+      await onSave(next);
+      toast.success(t("quotaOverride.successSave"));
+    } catch {
+      toast.error(t("quotaOverride.errorReasonRequired"));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const handleReset = () => {
-    onReset();
-    toast.success(t("quotaOverride.successReset"));
+  const handleReset = async () => {
+    setSubmitting(true);
+    try {
+      await onReset();
+      toast.success(t("quotaOverride.successReset"));
+    } catch {
+      toast.error(t("quotaOverride.errorReasonRequired"));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

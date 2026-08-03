@@ -2,7 +2,17 @@
 import { useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useAdminProfile, useAudit, useConfigTiers, useUser } from "@/shared/api/queries";
+import { toast } from "sonner";
+import {
+  useAdminProfile,
+  useAudit,
+  useConfigTiers,
+  useGrantUserQuota,
+  useResetUserQuotaOverride,
+  useSetUserQuotaOverride,
+  useSetUserStatus,
+  useUser,
+} from "@/shared/api/queries";
 import { QuotaCard } from "@/features/user-detail/QuotaCard";
 import { ModelDistribution } from "@/features/user-detail/ModelDistribution";
 import { TicketHistory } from "@/features/user-detail/TicketHistory";
@@ -36,8 +46,10 @@ export default function UserDetailPage() {
   const suspend = useDisclosure();
   const grantTokens = useDisclosure();
   const [tab, setTab] = useState("overview");
-  const [grantedEntries, setGrantedEntries] = useState<QuotaHistoryEntry[]>([]);
-  const [quotaOverride, setQuotaOverride] = useState<QuotaOverride | null>(null);
+  const grantMutation = useGrantUserQuota(params.id);
+  const setStatusMutation = useSetUserStatus(params.id);
+  const setOverrideMutation = useSetUserQuotaOverride(params.id);
+  const resetOverrideMutation = useResetUserQuotaOverride(params.id);
 
   const data = user.data;
 
@@ -52,30 +64,48 @@ export default function UserDetailPage() {
     return true;
   })();
 
-  const mergedHistory = useMemo<QuotaHistoryEntry[]>(() => {
-    const fromServer = data?.quotaHistory ?? [];
-    return [...grantedEntries, ...fromServer];
-  }, [grantedEntries, data?.quotaHistory]);
+  const overrideHistory = useMemo<QuotaHistoryEntry[]>(() => {
+    const raw = (data && (data as { quotaHistory?: QuotaHistoryEntry[] }).quotaHistory) ?? [];
+    return raw.filter((entry) => (entry as QuotaHistoryEntry & { kind?: string }).kind !== "override");
+  }, [data]);
 
-  const totalGranted = useMemo(
-    () => grantedEntries.reduce((sum, e) => sum + e.amount, 0),
-    [grantedEntries],
-  );
-  const effectiveRequestsLimit = (data?.requestsLimit ?? 0) + totalGranted;
+  const quotaOverride = useMemo<QuotaOverride | null>(() => {
+    const raw = (data && (data as { quotaHistory?: QuotaHistoryEntry[] }).quotaHistory) ?? [];
+    const found = raw.find((entry) => (entry as QuotaHistoryEntry & { kind?: string }).kind === "override");
+    return found ? (found as unknown as QuotaOverride) : null;
+  }, [data]);
 
-  const handleGrantSubmit = ({ amount, reason }: GrantTokensInput) => {
+  const handleGrantSubmit = async ({ amount, reason }: GrantTokensInput) => {
     if (!data) return;
-    const actor =
-      adminProfile.data?.name ?? adminProfile.data?.email ?? "admin@oneai.app";
-    const newTotal = effectiveRequestsLimit + amount;
-    const entry: QuotaHistoryEntry = {
-      date: new Date().toISOString(),
-      amount,
-      by: actor,
-      reason: reason || t("grantTokensNoReason"),
-      newTotal,
-    };
-    setGrantedEntries((prev) => [entry, ...prev]);
+    const actor = adminProfile.data?.name ?? adminProfile.data?.email ?? "admin@oneai.app";
+    try {
+      await grantMutation.mutateAsync({ amount, reason, actor });
+      toast.success(t("grantTokensSuccess"));
+    } catch (error) {
+      toast.error(t("grantTokensError"));
+      throw error;
+    }
+  };
+
+  const handleSuspendSubmit = async (reason: string) => {
+    if (!data) return;
+    const nextStatus = data.status === "suspended" ? "active" : "suspended";
+    const actor = adminProfile.data?.name ?? adminProfile.data?.email ?? "admin@oneai.app";
+    try {
+      await setStatusMutation.mutateAsync({ status: nextStatus, reason, actor });
+      toast.success(nextStatus === "suspended" ? t("userSuspended") : t("userReactivated"));
+    } catch {
+      toast.error(tc("error"));
+    }
+  };
+
+  const handleOverrideSave = async (next: QuotaOverride) => {
+    const actor = adminProfile.data?.name ?? adminProfile.data?.email ?? "admin@oneai.app";
+    await setOverrideMutation.mutateAsync({ override: next, actor });
+  };
+
+  const handleOverrideReset = async () => {
+    await resetOverrideMutation.mutateAsync({ reason: "Reset to tier default" });
   };
 
   const userAudit = (audit.data ?? []).filter((e) => e.target === data?.id);
@@ -178,7 +208,7 @@ export default function UserDetailPage() {
             <TabsContent value="quota" className="space-y-5">
               <QuotaCard
                 requestsUsed={data.requestsUsed}
-                requestsLimit={effectiveRequestsLimit}
+                requestsLimit={data.requestsLimit}
                 costUsd={data.costUsd}
               />
               {isAdmin && (
@@ -192,6 +222,7 @@ export default function UserDetailPage() {
                         variant="primary"
                         onClick={() => grantTokens.open()}
                         data-testid="grant-tokens-open"
+                        disabled={grantMutation.isPending}
                       >
                         {t("grantTokensAction")}
                       </Button>
@@ -209,11 +240,12 @@ export default function UserDetailPage() {
                   actorName={
                     adminProfile.data?.name ?? adminProfile.data?.email ?? "admin@oneai.app"
                   }
-                  onSave={setQuotaOverride}
-                  onReset={() => setQuotaOverride(null)}
+                  onSave={handleOverrideSave}
+                  onReset={handleOverrideReset}
+                  saving={setOverrideMutation.isPending}
                 />
               )}
-              <QuotaHistory entries={mergedHistory} />
+              <QuotaHistory entries={overrideHistory} />
             </TabsContent>
 
             <TabsContent value="models" className="space-y-5">
@@ -238,7 +270,8 @@ export default function UserDetailPage() {
         open={suspend.isOpen}
         onOpenChange={suspend.toggle}
         isSuspended={data?.status === "suspended"}
-        onSubmit={() => {}}
+        onSubmit={handleSuspendSubmit}
+        submitting={setStatusMutation.isPending}
       />
       <GrantTokensModal
         open={grantTokens.isOpen}
