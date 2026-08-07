@@ -1,5 +1,10 @@
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTypescript from "eslint-config-next/typescript";
+
+var require = createRequire(import.meta.url);
+var module = { exports: {} };
+
+
 export default [
   ...nextVitals,
   ...nextTypescript,
