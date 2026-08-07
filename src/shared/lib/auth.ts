@@ -69,19 +69,46 @@ export async function refreshAdminSession(): Promise<AdminCredentials> {
 }
 
 export async function getSession(): Promise<AdminUser | null> {
-  const accessToken = (await cookies()).get(ACCESS_COOKIE)?.value;
-  if (!accessToken) return null;
-  try {
-    const response = await backendJson<{ user: AdminUser }>("/admin/auth/me", {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-    return response.user;
-  } catch (error) {
-    if (error instanceof AdminAuthenticationError && [401, 403].includes(error.status)) {
+  const store = await cookies();
+  const accessToken = store.get(ACCESS_COOKIE)?.value;
+  const refreshToken = store.get(REFRESH_COOKIE)?.value;
+  const sessionToken = store.get(SESSION_COOKIE)?.value;
+
+  // No cookies at all → not signed in.
+  if (!accessToken && !refreshToken) return null;
+
+  // Access token present → try it first (cheapest path).
+  if (accessToken) {
+    try {
+      const response = await backendJson<{ user: AdminUser }>("/admin/auth/me", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      return response.user;
+    } catch (error) {
+      if (!(error instanceof AdminAuthenticationError) || error.status !== 401) {
+        return null;
+      }
+      // 401 → fall through to refresh attempt below.
+    }
+  }
+
+  // Access missing or expired → attempt one refresh using refresh+session tokens.
+  if (refreshToken && sessionToken) {
+    try {
+      const refreshed = await refreshAdminSession();
+      await setSession(refreshed);
+      const response = await backendJson<{ user: AdminUser }>("/admin/auth/me", {
+        headers: { Authorization: `Bearer ${refreshed.accessToken}` },
+      });
+      return response.user;
+    } catch {
+      // Refresh failed → clear stale cookies so the next request is a clean login.
+      clearSessionCookies(store);
       return null;
     }
-    return null;
   }
+
+  return null;
 }
 
 export async function getAdminAccountAuth(): Promise<{

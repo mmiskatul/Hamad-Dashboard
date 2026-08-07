@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useProviders } from "@/shared/api/queries";
+import { toast } from "sonner";
+import { useAdminProfile, useProviders, useSetProviderStatus } from "@/shared/api/queries";
 import { ProviderHealthTable } from "@/features/providers/ProviderHealthTable";
 import { Button } from "@/components/ui/button";
 import { DisableProviderModal } from "@/components/modals/DisableProviderModal";
@@ -9,8 +10,25 @@ import type { ProviderHealth } from "@/shared/api/types";
 
 export default function ProvidersPage() {
   const t = useTranslations("providers");
+  const tCommon = useTranslations("common");
+  const tToast = useTranslations("toast");
   const providers = useProviders();
+  const adminProfile = useAdminProfile();
+  const setStatus = useSetProviderStatus();
   const [target, setTarget] = useState<ProviderHealth | null>(null);
+
+  const handleSubmit = async (reason: string) => {
+    if (!target) return;
+    const next = target.status === "operational" ? "disabled" : "operational";
+    const actor = adminProfile.data?.name ?? adminProfile.data?.email ?? "admin@oneai.app";
+    try {
+      await setStatus.mutateAsync({ providerId: target.id, status: next, reason, actor });
+      toast.success(tToast(next === "operational" ? "providerEnabled" : "providerDisabled"));
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : tCommon("error"));
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-3 border-b border-[var(--border-default)] pb-5">
@@ -28,6 +46,7 @@ export default function ProvidersPage() {
               variant={p.status === "operational" ? "ghost" : "danger"}
               size="sm"
               onClick={() => setTarget(p)}
+              disabled={setStatus.isPending}
             >
               {p.status === "operational" ? t("disable") : t("enable")}
             </Button>
@@ -41,7 +60,7 @@ export default function ProvidersPage() {
           providerName={target.name}
           affectedUsers={47}
           isEnabled={target.status === "operational"}
-          onSubmit={() => {}}
+          onSubmit={handleSubmit}
         />
       )}
     </div>

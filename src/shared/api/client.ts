@@ -143,8 +143,11 @@ export const api = {
     return requestJson<LegalDoc>(`/legal/${docType}/versions/${encodeURIComponent(versionId)}`, { method: 'DELETE', body: JSON.stringify({ actor, reason }) });
   },
 
-  async postReply(ticketId: string, body: string, actor: string): Promise<SupportReply> {
-    return requestJson<SupportReply>(`/tickets/${encodeURIComponent(ticketId)}/replies`, { method: 'POST', body: JSON.stringify({ body, actor }) });
+  async postReply(ticketId: string, body: string, actor: string, notifyUser = true): Promise<SupportReply> {
+    return requestJson<SupportReply>(`/tickets/${encodeURIComponent(ticketId)}/replies`, {
+      method: 'POST',
+      body: JSON.stringify({ body, actor, notifyUser }),
+    });
   },
 
   async closeTicket(ticketId: string, actor: string, reason: string): Promise<Ticket> {
@@ -193,6 +196,27 @@ export const api = {
     actor = 'admin@oneai.app',
   ): Promise<UnitPricingConfig> {
     return requestJson<UnitPricingConfig>('/unit-pricing', { method: 'PATCH', body: JSON.stringify({ ...payload, actor }) });
+  },
+
+  async setProviderStatus(
+    providerId: string,
+    status: 'operational' | 'degraded' | 'outage' | 'disabled',
+    reason: string,
+    actor = 'admin@oneai.app',
+  ): Promise<ProviderHealth> {
+    return requestJson<ProviderHealth>(`/providers/${encodeURIComponent(providerId)}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status, reason, actor }),
+    });
+  },
+
+  async updateAdminProfile(
+    payload: { name: string; reason?: string; actor?: string },
+  ): Promise<AdminProfile> {
+    return requestJson<AdminProfile>('/profile', {
+      method: 'PATCH',
+      body: JSON.stringify(payload),
+    });
   },
 
   __resetCache() {

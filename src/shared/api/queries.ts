@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/shared/api/client";
 import type {
   ModelConfig,
+  ProviderHealth,
   QuotaHistoryEntry,
   QuotaOverride,
   SupportReply,
@@ -176,7 +177,8 @@ export const useTicketReplies = (id: string) =>
 export const usePostReply = (ticketId: string) => {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (payload: { body: string; actor: string }) => api.postReply(ticketId, payload.body, payload.actor),
+    mutationFn: (payload: { body: string; actor: string; notifyUser?: boolean }) =>
+      api.postReply(ticketId, payload.body, payload.actor, payload.notifyUser ?? true),
     onSuccess: (data: SupportReply) => {
       const existing = qc.getQueryData<SupportReply[]>(qk.ticketReplies(ticketId)) ?? [];
       qc.setQueryData<SupportReply[]>(qk.ticketReplies(ticketId), [...existing, data]);
@@ -408,6 +410,42 @@ export const useResetUserQuotaOverride = (userId: string) => {
         current?.map((item) => (item.id === user.id ? { ...item, ...user } : item)),
       );
       qc.invalidateQueries({ queryKey: qk.user(userId) });
+      qc.invalidateQueries({ queryKey: qk.audit });
+    },
+  });
+};
+
+export const useSetProviderStatus = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: {
+      providerId: string;
+      status: 'operational' | 'degraded' | 'outage' | 'disabled';
+      reason: string;
+      actor?: string;
+    }) =>
+      api.setProviderStatus(
+        payload.providerId,
+        payload.status,
+        payload.reason,
+        payload.actor ?? 'admin@oneai.app',
+      ),
+    onSuccess: (updated) => {
+      qc.setQueryData<ProviderHealth[]>(qk.providers, (current) =>
+        current?.map((p) => (p.id === updated.id ? { ...p, ...updated } : p)),
+      );
+      qc.invalidateQueries({ queryKey: qk.audit });
+    },
+  });
+};
+
+export const useUpdateAdminProfile = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: { name: string; reason?: string; actor?: string }) =>
+      api.updateAdminProfile(payload),
+    onSuccess: (data) => {
+      qc.setQueryData(qk.adminProfile, data);
       qc.invalidateQueries({ queryKey: qk.audit });
     },
   });

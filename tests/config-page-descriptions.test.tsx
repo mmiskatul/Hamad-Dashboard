@@ -40,6 +40,8 @@ vi.mock("@/shared/api/queries", () => ({
   }),
   usePlanDefaults: () => ({ data: null }),
   useUpdateTiers: () => ({ mutateAsync: vi.fn() }),
+  useUpdateModels: () => ({ mutateAsync: vi.fn(), isPending: false }),
+  useAdminProfile: () => ({ data: { name: "Admin", email: "admin@oneai.app" } }),
 }));
 
 import ModelsPage from "@/app/(admin)/admin/config/models/page";
