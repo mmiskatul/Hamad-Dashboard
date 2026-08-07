@@ -5,7 +5,6 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/input";
 import { Card, CardBody, CardHeader } from "@/components/ui/card";
-import { sendMail } from "@/shared/lib/email";
 import { useCloseTicket, usePostReply } from "@/shared/api/queries";
 
 export function ReplyComposer({
@@ -17,18 +16,14 @@ export function ReplyComposer({
 }) {
   const t = useTranslations("support");
   const [body, setBody] = useState("");
+  const [notifyUser, setNotifyUser] = useState(true);
   const post = usePostReply(ticketId);
   const close = useCloseTicket();
 
   const onSend = async () => {
     const trimmed = body.trim();
     if (!trimmed) return;
-    await post.mutateAsync({ body: trimmed, actor: "admin@oneai.app" });
-    await sendMail({
-      to: userEmail,
-      subject: "OneAI Support",
-      message: trimmed,
-    });
+    await post.mutateAsync({ body: trimmed, actor: "admin@oneai.app", notifyUser });
     toast.success(t("sentToast", { email: userEmail }));
     setBody("");
   };
@@ -68,6 +63,16 @@ export function ReplyComposer({
           className="min-h-[120px]"
           disabled={sending}
         />
+        <label className="flex items-center gap-2 text-xs text-[var(--text-secondary)]">
+          <input
+            type="checkbox"
+            checked={notifyUser}
+            onChange={(e) => setNotifyUser(e.target.checked)}
+            disabled={sending}
+            data-testid="notify-user"
+          />
+          {t("notifyUser")}
+        </label>
         <div className="flex flex-wrap items-center justify-end gap-2">
           <Button variant="ghost" onClick={onDraft} disabled={sending}>
             {t("saveDraft")}
